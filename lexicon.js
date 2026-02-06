@@ -101,19 +101,6 @@ function makeTermClickable(span) {
     });    
 }
 
-function highlightTextNode(textNode, searchTerm) {
-    const text = textNode.textContent;
-    const escapedTerm = escapeRegex(searchTerm);
-    const regex = new RegExp(`(?<!\\w)${escapedTerm}(?!\\w)`, 'gi');
-    const html = text.replace(regex, `<span class="highlight" data-term="${searchTerm}">${searchTerm}</span>`);
-    const temp = document.createElement('div');
-    temp.innerHTML = html;
-  
-    temp.querySelectorAll('.highlight')
-        .forEach(span => makeTermClickable(span));
-  
-    textNode.parentNode.replaceChild(temp, textNode);
-}
 
 function getTextNodes(root) {
     const walker = document.createTreeWalker(
@@ -130,19 +117,39 @@ function getTextNodes(root) {
     return nodes;
 }
 
+function createTermRegex(searchTerm) {
+    const escapedTerm = escapeRegex(searchTerm);
+    return new RegExp(`(?<!\\w)${escapedTerm}(?!\\w)`, 'gi');
+}
+
+
+
+function highlightTextNode(textNode, searchTerm) {
+    const text = textNode.textContent;
+    const regex = createTermRegex(searchTerm);
+    const html = text.replace(regex, `<span class="highlight" data-term="${searchTerm}">${searchTerm}</span>`);
+    
+    // Solo se ci sono match effettivi
+    if (html !== text) {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+      
+        temp.querySelectorAll('.highlight')
+            .forEach(span => makeTermClickable(span));
+      
+        textNode.parentNode.replaceChild(temp, textNode);
+    }
+}
+
 async function highlightTerms(selector, channel) {
     const lexicon = document.querySelector(selector);
     let searchTerms = await termsByChannel(channel);
+    
     searchTerms.forEach(searchTerm => {
         const textNodes = getTextNodes(lexicon);
-        const escapedTerm = escapeRegex(searchTerm);
-        const regex = new RegExp(`(?<!\\w)${escapedTerm}(?!\\w)`, 'gi');
-    
-        textNodes
-            .filter(node => regex.test(node.textContent))
-            .forEach(node => {
-                regex.lastIndex = 0;
-                highlightTextNode(node, searchTerm);
-            });
+        
+         textNodes.forEach(node => {
+            highlightTextNode(node, searchTerm);
+        });
     });
 }
