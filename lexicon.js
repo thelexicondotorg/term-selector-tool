@@ -3,15 +3,16 @@ const TABLE_ID = 'tblAuOlHMAQPjdhGM';
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
 
 class Term {
-    constructor(term, definition) {
+    constructor(term, channel, definition) {
         this.term = term;
+        this.channel = channel;
         this.definition = definition;
     }
 }
 
-async function fetchRecord(searchTerm) {
-    const termValue = searchTerm;
-    const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula={TERM}="${termValue.replace(/"/g, '\\"')}"`;
+
+async function fetchFromAirtable(filterFormula) {
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
   
     try {
         const response = await fetch(url, {
@@ -23,21 +24,36 @@ async function fetchRecord(searchTerm) {
         if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     
         const data = await response.json();
-
-        if(data.records.length > 0) {
-            const firstRecord = data.records[0].fields;
-
-            console.log("AirTable returned: " + JSON.stringify(firstRecord));
-
-            return new Term(searchTerm, firstRecord.Definition);
-        } else {
-            return null;
-        }
+        return data.records;
     } catch (error) {
         console.error(`Errore: ${error.message}`);
-        return null;
+        return [];
     }
 }
+
+async function fetchRecord(searchTerm) {
+    const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
+    const records = await fetchFromAirtable(formula);
+    
+    if (records.length > 0) {
+        const firstRecord = records[0].fields;
+        return new Term(searchTerm, firstRecord.CHANNEL, firstRecord.Definition);
+    }
+    return null;
+}
+
+async function termsByChannel(channel) {
+    const formula = `FIND("${channel.replace(/"/g, '\\"')}",ARRAYJOIN({CHANNEL},","))`;
+    const records = await fetchFromAirtable(formula);
+    
+    if (records.length > 0) {
+        console.log(`Found ${records.length} records for channel ${channel}`);
+        return records.map(record => record.fields.TERM);
+    }
+    console.log(`No records found for channel ${channel}`);
+    return [];
+}
+
 
 function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -114,8 +130,9 @@ function getTextNodes(root) {
     return nodes;
 }
 
-function highlightTerms(selector, searchTerms) {
+async function highlightTerms(selector, channel) {
     const lexicon = document.querySelector(selector);
+    let searchTerms = await termsByChannel(channel);
     searchTerms.forEach(searchTerm => {
         const textNodes = getTextNodes(lexicon);
         const escapedTerm = escapeRegex(searchTerm);
