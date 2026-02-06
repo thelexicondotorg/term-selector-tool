@@ -64,7 +64,7 @@ async function getPopupContent(searchTerm) {
     if (content) {
         return `<span><strong>${searchTerm}:</strong> ${content.definition}</span>`;
     }
-    return `<span><strong>${searchTerm}</strong> (nessuna descrizione disponibile)</span>`;
+    return `<span><strong>${searchTerm}</strong> (No description available)</span>`;
 }
 
 async function showPopup(searchTerm, event) {
@@ -127,9 +127,8 @@ function createTermRegex(searchTerm) {
 function highlightTextNode(textNode, searchTerm) {
     const text = textNode.textContent;
     const regex = createTermRegex(searchTerm);
-    const html = text.replace(regex, `<span class="highlight" data-term="${searchTerm}">${searchTerm}</span>`);
+    const html = text.replace(regex, match => `<span class="highlight" data-term="${searchTerm}">${match}</span>`);
     
-    // Solo se ci sono match effettivi
     if (html !== text) {
         const temp = document.createElement('div');
         temp.innerHTML = html;
