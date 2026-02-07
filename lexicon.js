@@ -75,12 +75,25 @@ function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+
+let popupTemplate = null;
+
+async function loadPopupTemplate() {
+    if (!popupTemplate) {
+        const response = await fetch('popup.html');
+        popupTemplate = await response.text();
+    }
+    return popupTemplate;
+}
+
 async function getPopupContent(searchTerm) {
     const content = await fetchRecord(searchTerm);
-    if (content) {
-        return `<span><strong>${searchTerm}:</strong> ${content.definition}</span>`;
-    }
-    return `<span><strong>${searchTerm}</strong> (No description available)</span>`;
+
+    const template = await loadPopupTemplate();
+    
+    return template
+            .replace('{{term}}', searchTerm)
+            .replace('{{definition}}', content.definition);
 }
 
 async function showPopup(searchTerm, event) {
