@@ -3,10 +3,14 @@ const TABLE_ID = 'tblAuOlHMAQPjdhGM';
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
 
 class Term {
-    constructor(term, channel, definition) {
+    constructor(term, uid, finalSvg, channel, definition, designer, designerNationality) {
         this.term = term;
+        this.uid = uid;
+        this.finalSvg = finalSvg;
         this.channel = channel;
         this.definition = definition;
+        this.designer = designer;
+        this.designerNationality = designerNationality;
     }
 }
 
@@ -36,9 +40,20 @@ async function fetchRecord(searchTerm) {
     const records = await fetchFromAirtable(formula);
     
     if (records.length > 0) {
-        const firstRecord = records[0].fields;
+        const firstRecord = records[0];
         console.log(JSON.stringify(records[0], null, 2));
-        return new Term(searchTerm, firstRecord.CHANNEL, firstRecord.Definition);
+
+        let term = firstRecord.fields.TERM;
+        let uid = firstRecord.UID;
+        let finalSvg = firstRecord.fields["Final SVG"][0].url;
+        let channel = firstRecord.fields.CHANNEL;
+        let definition = firstRecord.Definition;
+        let designer = firstRecord.fields.Designer[0];
+        let designerNationality = firstRecord.fields.Nationality[0];
+
+        let o = new Term(term, uid, finalSvg, channel, definition, designer, designerNationality);
+        console.log(JSON.stringify(o, null, 2))
+        return o;
     }
     return null;
 }
