@@ -37,6 +37,7 @@ async function fetchRecord(searchTerm) {
     
     if (records.length > 0) {
         const firstRecord = records[0].fields;
+        console.log(JSON.stringify(records[0], null, 2));
         return new Term(searchTerm, firstRecord.CHANNEL, firstRecord.Definition);
     }
     return null;
