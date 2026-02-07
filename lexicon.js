@@ -47,7 +47,7 @@ async function fetchRecord(searchTerm) {
         let uid = firstRecord.UID;
         let finalSvg = firstRecord.fields["Final SVG"][0].url;
         let channel = firstRecord.fields.CHANNEL;
-        let definition = firstRecord.Definition;
+        let definition = firstRecord.fields.Definition;
         let designer = firstRecord.fields.Designer[0];
         let designerNationality = firstRecord.fields.Nationality[0];
 
@@ -90,9 +90,11 @@ async function getPopupContent(searchTerm) {
     const content = await fetchRecord(searchTerm);
 
     const template = await loadPopupTemplate();
-    
+
     return template
-            .replace('{{term}}', searchTerm)
+            .replace('{{channel}}', content.channel)
+            .replace('{{iconUrl}}', content.finalSvg)
+            .replace('{{term}}', content.term)
             .replace('{{definition}}', content.definition);
 }
 
