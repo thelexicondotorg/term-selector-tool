@@ -1,17 +1,102 @@
+<style>
+@font-face {
+    font-family: 'Trade Gothic';
+    src: url('TradeGothicLTStd-BdCn20.otf') format('opentype');
+    font-weight: bold;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap');
+
+.popup-card {
+    width: 531px;
+    height: 531px;
+    background-color: #EBEAEA;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.popup-logo {
+    max-width: 100px;
+    height: auto;
+}
+
+.popup-channel {
+    background-color: #000000;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: 'Trade Gothic', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: right;
+    max-width: fit-content;
+}
+
+.popup-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.popup-icon-container {
+    margin-bottom: 30px;
+}
+
+.popup-icon {
+    width: 200px;
+    height: auto;
+}
+
+.popup-term {
+    background-color: #97C21C;
+    color: white;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-family: 'Trade Gothic', sans-serif;
+    font-size: 40px;
+    text-transform: uppercase;
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+.popup-definition {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+    color: #000;
+    margin: 0;
+    max-width: 450px;
+}
+</style>
+
 <div class="popup-card">
   <header class="popup-header">
     <img src="lexicon.png" alt="The Lexicon" class="popup-logo">
-    <div class="popup-channel"><b>channel</b>:  {{channel}}</div>
+    <div class="popup-channel">{{channel}}</div>
   </header>
     
   <div class="popup-body">
     <div class="popup-icon-container">
-      <img src="{{iconUrl}}" class="popup-icon">
+      <img src="{{finalSvg}}" class="popup-icon">
     </div>
         
-    <h2 class="popup-term"><b>term</b>: {{term}}</h2>
+    <h2 class="popup-term">{{term}}</h2>
         
-    <p class="popup-definition"><b>definition</b>: {{definition}}</p>
+    <p class="popup-definition">{{definition}}</p>
       
   </div>
 </div>

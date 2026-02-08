@@ -90,10 +90,11 @@ async function getPopupContent(searchTerm) {
     const content = await fetchRecord(searchTerm);
 
     const template = await loadPopupTemplate();
-
+    
+    console.log("finalsvg vale: " +  content.finalSvg);
     return template
             .replace('{{channel}}', content.channel)
-            .replace('{{iconUrl}}', content.finalSvg)
+            .replace('{{finalSvg}}', content.finalSvg)
             .replace('{{term}}', content.term)
             .replace('{{definition}}', content.definition);
 }
@@ -182,4 +183,15 @@ async function highlightTerms(selector, channel) {
             highlightTextNode(node, searchTerm);
         });
     });
+
+
+
+
+    // AUTO-OPEN
+    const freshFoodSpan = Array.from(document.querySelectorAll('.highlight'))
+        .find(span => span.dataset.term.toLowerCase() === 'fresh food farmacy');
+    
+    if (freshFoodSpan) {
+        await showPopup(freshFoodSpan.dataset.term, { pageX: 400, pageY: 300 });
+    }
 }
