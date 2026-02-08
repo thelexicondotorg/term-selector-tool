@@ -37,12 +37,13 @@ async function fetchFromAirtable(filterFormula) {
 }
 
 async function fetchRecord(channel, searchTerm) {
+    console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
     const records = await fetchFromAirtable(formula);
     
     if (records.length > 0) {
         const firstRecord = records[0];
-        console.log(JSON.stringify(records[0], null, 2));
+        //        console.log(JSON.stringify(records[0], null, 2));
 
         let term = firstRecord.fields.TERM;
         let uid = firstRecord.UID;
@@ -87,12 +88,11 @@ async function loadPopupTemplate() {
     return popupTemplate;
 }
 
-async function getPopupContent(searchTerm, channel) {
-    const content = await fetchRecord(searchTerm, channel);
+async function getPopupContent(channel, searchTerm) {
+    const content = await fetchRecord(channel, searchTerm);
 
     const template = await loadPopupTemplate();
     
-    console.log("finalsvg vale: " +  content.finalSvg);
     return template
             .replace('{{channel}}', content.channel)
             .replace('{{finalSvg}}', content.finalSvg)
@@ -100,7 +100,7 @@ async function getPopupContent(searchTerm, channel) {
             .replace('{{definition}}', content.definition);
 }
 
-async function showPopup(searchTerm, channel, event) {
+async function showPopup(channel, searchTerm, event) {
     const existingPopup = document.querySelector('.term-popup');
     if (existingPopup) {
         existingPopup.remove();
@@ -113,7 +113,7 @@ async function showPopup(searchTerm, channel, event) {
   
     document.body.appendChild(popup);
     
-    popup.innerHTML = await getPopupContent(searchTerm, channel);
+    popup.innerHTML = await getPopupContent(channel, searchTerm);
   
     // Close popup when user clicks outside
     setTimeout(() => {
@@ -130,7 +130,7 @@ function makeTermClickable(span, channel) {
     span.style.cursor = 'pointer';
     span.addEventListener('click', async (e) => {
         e.stopPropagation();
-        await showPopup(span.dataset.term, channel, e);
+        await showPopup(channel, span.dataset.term, e);
     });    
 }
 
@@ -193,6 +193,6 @@ async function highlightTerms(selector, channel) {
         .find(span => span.dataset.term.toLowerCase() === 'fresh food farmacy');
     
     if (freshFoodSpan) {
-        await showPopup(freshFoodSpan.dataset.term, channel, { pageX: 400, pageY: 300 });
+        await showPopup(channel, freshFoodSpan.dataset.term, { pageX: 400, pageY: 300 });
     }
 }
