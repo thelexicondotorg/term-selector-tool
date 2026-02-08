@@ -126,6 +126,12 @@ async function getPopupContent(channel, searchTerm) {
 
     const template = await loadPopupTemplate();
 
+    const otherChannelsHtml = content.otherChannels
+        .filter(ch => ch !== content.channel) // skip the current Channel
+        .map(ch => `<span class="popup-channel-tag">${ch}</span>`)
+        .join('');
+
+    
     return template
         .replace(/{{channel}}/g, content.channel)
         .replace(/{{finalSvg}}/g, content.finalSvg)
@@ -133,9 +139,7 @@ async function getPopupContent(channel, searchTerm) {
         .replace(/{{definition}}/g, content.definition)
         .replace(/{{designer}}/g, content.designer)
         .replace(/{{designerNationality}}/g, content.designerNationality)
-        .replace(/{{otherChannel1}}/g, content.otherChannels[0] || '')
-        .replace(/{{otherChannel2}}/g, content.otherChannels[1] || '')
-        .replace(/{{otherChannel3}}/g, content.otherChannels[2] || '');
+        .replace(/{{otherChannelsHtml}}/g, otherChannelsHtml);
 }
 
 async function showPopup(channel, searchTerm, event) {
