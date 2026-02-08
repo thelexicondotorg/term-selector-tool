@@ -78,6 +78,32 @@ function escapeRegex(str) {
 }
 
 
+function initializeCardFlip() {
+    const cardTransitionTime = 500;
+    const cardContainer = document.querySelector('.js-popup-card');
+    const flipTriggers = document.querySelectorAll('.js-flip-trigger');
+    let switching = false;
+
+    flipTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            if (switching) {
+                return false;
+            }
+            switching = true;
+
+            cardContainer.classList.toggle('is-switched');
+            
+            setTimeout(() => {
+                const cards = cardContainer.querySelectorAll('.popup-card');
+                cards.forEach(card => card.classList.toggle('is-active'));
+                switching = false;
+            }, cardTransitionTime / 2);
+        });
+    });
+}
+
 let popupTemplate = null;
 
 async function loadPopupTemplate() {
@@ -94,10 +120,10 @@ async function getPopupContent(channel, searchTerm) {
     const template = await loadPopupTemplate();
     
     return template
-            .replace('{{channel}}', content.channel)
-            .replace('{{finalSvg}}', content.finalSvg)
-            .replace('{{term}}', content.term)
-            .replace('{{definition}}', content.definition);
+        .replace(/{{channel}}/g, content.channel)
+        .replace(/{{finalSvg}}/g, content.finalSvg)
+        .replace(/{{term}}/g, content.term)
+        .replace(/{{definition}}/g, content.definition);
 }
 
 async function showPopup(channel, searchTerm, event) {
@@ -114,7 +140,10 @@ async function showPopup(channel, searchTerm, event) {
     document.body.appendChild(popup);
     
     popup.innerHTML = await getPopupContent(channel, searchTerm);
-  
+
+
+    initializeCardFlip();
+    
     // Close popup when user clicks outside
     setTimeout(() => {
         document.addEventListener('click', function closePopup(e) {
