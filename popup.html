@@ -137,6 +137,10 @@
     z-index: 10;
 }
 
+.popup-flip-back {
+    left: 10px;
+}
+
 .popup-flip img {
     height: 30px;
     width: auto;
@@ -182,6 +186,119 @@
     }
 }
 
+
+/* BACK SIDE STYLES */
+.popup-header-back {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.popup-icon-back {
+    width: 100px;
+}
+
+.popup-icon-back .popup-icon {
+    width: 100px;
+    height: auto;
+}
+
+.popup-designer {
+    text-align: right;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.popup-designer-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 2px;
+}
+
+.popup-designer-country {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.popup-body-back {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-term-back {
+    font-family: 'Trade Gothic', sans-serif;
+    font-size: 38px;
+    text-transform: uppercase;
+    margin: 0 0 20px 0;
+    line-height: 1;
+    color: #000;
+}
+
+.popup-channel-badge {
+    background-color: #000000;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: 'Trade Gothic', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 15px;
+}
+
+.popup-channel-description {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #000;
+    margin: 0 0 25px 0;
+}
+
+.popup-also-appears {
+    margin-top: auto;
+}
+
+.popup-also-title {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+.popup-other-channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.popup-channel-tag {
+    background-color: #000000;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.popup-channel-tag:hover {
+    background-color: #333333;
+}
+
 </style>
 
 <div class="popup-card-container js-popup-card">
@@ -205,37 +322,51 @@
       </div>
       
       <div class="popup-dot-navigator">
-        <img src="img/dot-navigator-1.png">
+        <img src="img/dot-navigator-front.png">
       </div>
       
       <div class="popup-flip js-flip-trigger">
-        <img src="img/flip-1.png" alt="Flip to learn more">
+        <img src="img/flip-front.png" alt="Flip to learn more">
       </div>
     </div>
     
     <!-- BACK SIDE -->
     <div class="popup-card popup-card--back">
-      <header class="popup-header">
-        <img src="img/lexicon.png" alt="The Lexicon" class="popup-logo">
-        <div class="popup-channel">{{channel}}</div>
-      </header>
-      
-      <div class="popup-body">
-        <div class="popup-icon-container">
+      <header class="popup-header-back">
+        <div class="popup-icon-back">
           <img src="{{finalSvg}}" class="popup-icon">
         </div>
-        
-        <h2 class="popup-term">{{term}}</h2>
-        
-        <p class="popup-definition">{{definition}}</p>
+        <div class="popup-designer">
+          <div class="popup-designer-name">Designed by {{designer}}</div>
+          <div class="popup-designer-country">{{designerNationality}}</div>
+        </div>
+      </header>
+  
+      <div class="popup-body-back">
+        <h1 class="popup-term-back">{{term}}</h1>
+    
+        <div class="popup-channel-badge">{{channel}}</div>
+    
+        <p class="popup-channel-description">
+          A comprehensive approach to understanding and preserving the variety of life forms in agricultural systems, emphasizing biodiversity's role in food security and sustainability.
+        </p>
+    
+        <div class="popup-also-appears">
+          <h3 class="popup-also-title">Also appears in</h3>
+          <div class="popup-other-channels">
+            <span class="popup-channel-tag">{{otherChannel1}}</span>
+            <span class="popup-channel-tag">{{otherChannel2}}</span>
+            <span class="popup-channel-tag">{{otherChannel3}}</span>
+          </div>
+        </div>
       </div>
-      
+  
       <div class="popup-dot-navigator">
-        <img src="img/dot-navigator-1.png">
+        <img src="img/dot-navigator-back.png">
       </div>
-      
-      <div class="popup-flip js-flip-trigger">
-        <img src="img/flip-1.png" alt="Flip to learn more">
+  
+      <div class="popup-flip popup-flip-back js-flip-trigger">
+        <img src="img/flip-back.png" alt="Flip to front">
       </div>
     </div>
     
