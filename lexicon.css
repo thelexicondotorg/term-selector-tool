@@ -1,13 +1,10 @@
 .term-popup {
-  border: 1px solid #eeeeee;
   min-height: 10em;
   min-width: 10em;
   position: absolute;
   background-color: #ffffff;
-  border: 1px solid #ccc;
   padding: 10px;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   z-index: 1000;
 }
 
