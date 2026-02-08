@@ -16,8 +16,14 @@ class Term {
 }
 
 
-async function fetchFromAirtable(filterFormula) {
-    const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
+async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
+    let url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
+    
+    // Aggiungi i campi specifici se forniti
+    if (fieldsToReturn.length > 0) {
+        const fieldsParam = fieldsToReturn.map(f => `fields[]=${encodeURIComponent(f)}`).join('&');
+        url += `&${fieldsParam}`;
+    }
   
     try {
         const response = await fetch(url, {
@@ -36,6 +42,7 @@ async function fetchFromAirtable(filterFormula) {
     }
 }
 
+
 async function fetchRecord(channel, searchTerm) {
     console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
@@ -43,7 +50,6 @@ async function fetchRecord(channel, searchTerm) {
     
     if (records.length > 0) {
         const firstRecord = records[0];
-        //        console.log(JSON.stringify(records[0], null, 2));
 
         let term = firstRecord.fields.TERM;
         let uid = firstRecord.UID;
@@ -62,7 +68,7 @@ async function fetchRecord(channel, searchTerm) {
 
 async function termsByChannel(channel) {
     const formula = `FIND("${channel.replace(/"/g, '\\"')}",ARRAYJOIN({CHANNEL},","))`;
-    const records = await fetchFromAirtable(formula);
+    const records = await fetchFromAirtable(formula, ['TERM']);
     
     if (records.length > 0) {
         console.log(`Found ${records.length} records for channel ${channel}`);
