@@ -11,6 +11,8 @@
     width: 531px;
     height: 531px;
     background-color: #EBEAEA;
+    background-image: url("img/background.png");
+    background-size: 160% auto;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -90,11 +92,25 @@
     margin: 0;
     max-width: 450px;
 }
+
+
+.popup-flip {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.popup-flip img {
+    height: 30px;
+    width: auto;
+}
 </style>
 
 <div class="popup-card">
   <header class="popup-header">
-    <img src="lexicon.png" alt="The Lexicon" class="popup-logo">
+    <img src="img/lexicon.png" alt="The Lexicon" class="popup-logo">
     <div class="popup-channel">{{channel}}</div>
   </header>
     
@@ -107,5 +123,8 @@
         
     <p class="popup-definition">{{definition}}</p>
       
+  </div>
+  <div class="popup-flip">
+    <img src="img/flip-1.png" alt="Flip to learn more">
   </div>
 </div>
