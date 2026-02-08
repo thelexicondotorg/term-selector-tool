@@ -46,7 +46,8 @@ async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
 async function fetchRecord(channel, searchTerm) {
     console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
-    const records = await fetchFromAirtable(formula);
+    const fields = ['TERM', 'Final SVG', 'CHANNEL', 'Definition', 'Designer', 'Nationality'];
+    const records = await fetchFromAirtable(formula, fields);
     
     if (records.length > 0) {
         const firstRecord = records[0];
