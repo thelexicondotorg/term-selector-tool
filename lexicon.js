@@ -118,12 +118,17 @@ async function getPopupContent(channel, searchTerm) {
     const content = await fetchRecord(channel, searchTerm);
 
     const template = await loadPopupTemplate();
-    
+
     return template
         .replace(/{{channel}}/g, content.channel)
         .replace(/{{finalSvg}}/g, content.finalSvg)
         .replace(/{{term}}/g, content.term)
-        .replace(/{{definition}}/g, content.definition);
+        .replace(/{{definition}}/g, content.definition)
+        .replace(/{{designer}}/g, content.designer)
+        .replace(/{{designerNationality}}/g, content.designerNationality)
+        .replace(/{{otherChannel1}}/g, content.otherChannels[0] || '')
+        .replace(/{{otherChannel2}}/g, content.otherChannels[1] || '')
+        .replace(/{{otherChannel3}}/g, content.otherChannels[2] || '');
 }
 
 async function showPopup(channel, searchTerm, event) {
