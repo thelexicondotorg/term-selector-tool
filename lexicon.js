@@ -19,12 +19,11 @@ class Term {
 async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
     let url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
     
-    // Aggiungi i campi specifici se forniti
     if (fieldsToReturn.length > 0) {
         const fieldsParam = fieldsToReturn.map(f => `fields[]=${encodeURIComponent(f)}`).join('&');
         url += `&${fieldsParam}`;
     }
-  
+
     try {
         const response = await fetch(url, {
             headers: {
@@ -35,6 +34,7 @@ async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
         if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     
         const data = await response.json();
+        console.log("Got from AirTable: " + JSON.stringify(data, null, 2));
         return data.records;
     } catch (error) {
         console.error(`Errore: ${error.message}`);
@@ -46,7 +46,7 @@ async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
 async function fetchRecord(channel, searchTerm) {
     console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
-    const fields = ['TERM', 'Final SVG', 'CHANNEL', 'Definition', 'Designer', 'Nationality'];
+    const fields = ['TERM', 'Final SVG', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality'];
     const records = await fetchFromAirtable(formula, fields);
     
     if (records.length > 0) {
@@ -57,7 +57,7 @@ async function fetchRecord(channel, searchTerm) {
         let finalSvg = firstRecord.fields["Final SVG"][0].url;
         let otherChannels = firstRecord.fields.CHANNEL;
         let definition = firstRecord.fields.Definition;
-        let designer = firstRecord.fields.Designer[0];
+        let designer = firstRecord.fields.DesignerLookup;
         let designerNationality = firstRecord.fields.Nationality[0];
 
         let o = new Term(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality);
