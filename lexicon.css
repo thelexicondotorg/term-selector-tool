@@ -8,16 +8,6 @@
   z-index: 1000;
 }
 
-body {
-  margin: 0;
-  padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .lexicon {
   width: 40%;
   max-width: 800px;
