@@ -17,31 +17,46 @@ class Term {
 
 
 async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
-    let url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
+    let allRecords = [];
+    let offset = null;
     
-    if (fieldsToReturn.length > 0) {
-        const fieldsParam = fieldsToReturn.map(f => `fields[]=${encodeURIComponent(f)}`).join('&');
-        url += `&${fieldsParam}`;
-    }
-
-    try {
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${PAT_TOKEN}`
-            }
-        });
+    do {
+        let url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
+        
+        if (fieldsToReturn.length > 0) {
+            const fieldsParam = fieldsToReturn.map(f => `fields[]=${encodeURIComponent(f)}`).join('&');
+            url += `&${fieldsParam}`;
+        }
+        
+        if (offset) {
+            url += `&offset=${encodeURIComponent(offset)}`;
+        }
+        
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${PAT_TOKEN}`
+                }
+            });
+        
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        
+            const data = await response.json();
+            console.log(`Fetched ${data.records.length} records from AirTable`);
+            
+            allRecords = allRecords.concat(data.records);
+            offset = data.offset; // undefined if there are no further pages
+            
+        } catch (error) {
+            console.error(`Error: ${error.message}`);
+            return allRecords;
+        }
+        
+    } while (offset);
     
-        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    
-        const data = await response.json();
-        console.log("Got from AirTable: " + JSON.stringify(data, null, 2));
-        return data.records;
-    } catch (error) {
-        console.error(`Errore: ${error.message}`);
-        return [];
-    }
+    console.log(`Total records fetched: ${allRecords.length}`);
+    return allRecords;
 }
-
 
 async function fetchRecord(channel, searchTerm) {
     console.log("Searching for: " + searchTerm);
@@ -61,7 +76,7 @@ async function fetchRecord(channel, searchTerm) {
         let designerNationality = firstRecord.fields.Nationality[0];
 
         let o = new Term(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality);
-        console.log(JSON.stringify(o, null, 2))
+        // console.log(JSON.stringify(o, null, 2))
         return o;
     }
     return null;
@@ -73,11 +88,17 @@ async function termsByChannel(channel) {
     
     if (records.length > 0) {
         console.log(`Found ${records.length} records for channel ${channel}`);
-        return records.map(record => record.fields.TERM);
+
+        let terms = records.map(record => record.fields.TERM);
+
+        console.log(JSON.stringify(terms, null, 2));
+        
+        return terms;
     }
     console.log(`No records found for channel ${channel}`);
     return [];
 }
+
 
 
 function escapeRegex(str) {
