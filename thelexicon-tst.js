@@ -167,7 +167,7 @@ async function showPopup(channel, searchTerm, event) {
         existingPopup.remove();
     }
     const popup = document.createElement('div');
-    popup.className = 'term-popup';
+    popup.className = 'thelexicon-tst';
     popup.innerHTML = 'Loading...';
     popup.style.left = `${event.pageX + 10}px`;
     popup.style.top = `${event.pageY + 10}px`;
