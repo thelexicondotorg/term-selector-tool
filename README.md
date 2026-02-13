@@ -57,9 +57,7 @@ Here is a minimal configuration:
     </div>
     
     <script src="thelexicon-tst.js"></script>
-    <script>
-        highlightTerms();
-    </script>
+    <script>document.addEventListener('DOMContentLoaded', () => { highlightTerms();});</script>
 </body>
 </html>
 ```
