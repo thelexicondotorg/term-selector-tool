@@ -269,15 +269,4 @@ async function highlightTerms() {
              highlightTextNode(node, searchTerm, channel);
         });
     });
-
-
-
-
-    // AUTO-OPEN
-    const freshFoodSpan = Array.from(document.querySelectorAll('.highlight'))
-        .find(span => span.dataset.term.toLowerCase() === 'fresh food farmacy');
-    
-    if (freshFoodSpan) {
-        await showPopup(channel, freshFoodSpan.dataset.term, { pageX: 400, pageY: 300 });
-    }
 }
