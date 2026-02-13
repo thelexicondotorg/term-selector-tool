@@ -91,8 +91,6 @@ async function termsByChannel(channel) {
 
         let terms = records.map(record => record.fields.TERM);
 
-        console.log(JSON.stringify(terms, null, 2));
-        
         return terms;
     }
     console.log(`No records found for channel ${channel}`);
