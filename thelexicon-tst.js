@@ -247,24 +247,45 @@ function getExcludedTerms() {
           .filter(term => term.length > 0);
 }
 
-async function highlightTerms() {
-    let selector = ".thelexicon-tst";
-    const lexicon = document.querySelector(selector);
-    const textNodes = getTextNodes(lexicon);
+function getLexicon() {
+    const selector = ".thelexicon-tst";
+    return document.querySelector(selector);
+}
+
+function getChannel() {
+    return document.querySelector('meta[name="tst-parent-taxonomy"]').getAttribute('content');
+}
+
+async function getTermsToHighlight() {
+    const channel = getChannel();
+    const searchTerms = await termsByChannel(channel);
+    const excludedTerms = getExcludedTerms();
+    return searchTerms.filter(term => !excludedTerms.includes(term.toLowerCase()));
+}
+
+async function foundTerms() {
+    const textNodes = getTextNodes(getLexicon());
+    const termsToHighlight = await getTermsToHighlight();
     
-    const channel = document.querySelector('meta[name="tst-parent-taxonomy"]').getAttribute('content');
+    let found = termsToHighlight.filter(searchTerm => {
+        const regex = new RegExp(`\\b${searchTerm}\\b`, 'gi');
+        return textNodes.some(node => regex.test(node.textContent));
+    });
 
+    let unique = [...new Set(found)];
 
-    let searchTerms = await termsByChannel(channel);
-    let excludedTerms = getExcludedTerms();
-    console.log("Will exclude the terms: " + JSON.stringify(excludedTerms, null, 2));
-    const remainingSearchTerms = searchTerms.filter(term => !excludedTerms.includes(term.toLowerCase()));
+    alert(JSON.stringify(unique));
+}
 
-    remainingSearchTerms.forEach(searchTerm => {
-        const textNodes = getTextNodes(lexicon);
-        
-         textNodes.forEach(node => {
-             highlightTextNode(node, searchTerm, channel);
+async function highlightTerms() {
+    const lexicon = getLexicon();
+    const channel = getChannel();
+    const termsToHighlight = await getTermsToHighlight();
+    
+    termsToHighlight.forEach(searchTerm => {
+        const textNodes = getTextNodes(lexicon); // freschi ad ogni iterazione
+        textNodes.forEach(node => {
+            highlightTextNode(node, searchTerm, channel);
         });
     });
 }
