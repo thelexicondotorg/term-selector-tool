@@ -278,6 +278,10 @@ async function foundTerms() {
 }
 
 async function highlightTerms() {
+    let isEnabled = document.querySelector('meta[name="thelexicon-tst-active"]').getAttribute('content');
+    if(isEnabled == "0") return;
+
+    
     const lexicon = getLexicon();
     const channel = getChannel();
     const termsToHighlight = await getTermsToHighlight();
