@@ -248,7 +248,7 @@ function getExcludedTerms() {
 }
 
 async function highlightTerms() {
-    let selector = ".lexicon";
+    let selector = ".thelexicon-tst";
     const lexicon = document.querySelector(selector);
     const textNodes = getTextNodes(lexicon);
     
