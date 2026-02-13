@@ -239,14 +239,30 @@ function highlightTextNode(textNode, searchTerm, channel) {
     }
 }
 
+function getExcludedTerms() {
+    let meta = document.querySelector('meta[name="tst-excluded-terms"]').getAttribute('content');
+
+    return meta
+        .toLowerCase()
+        .split(',')
+        .map(term => term.trim())
+          .filter(term => term.length > 0);
+}
+
 async function highlightTerms() {
     let selector = ".lexicon";
+    const lexicon = document.querySelector(selector);
+    const textNodes = getTextNodes(lexicon);
+    
     const channel = document.querySelector('meta[name="tst-parent-taxonomy"]').getAttribute('content');
 
-    const lexicon = document.querySelector(selector);
+
     let searchTerms = await termsByChannel(channel);
-    
-    searchTerms.forEach(searchTerm => {
+    let excludedTerms = getExcludedTerms();
+    console.log("Will exclude the terms: " + JSON.stringify(excludedTerms, null, 2));
+    const remainingSearchTerms = searchTerms.filter(term => !excludedTerms.includes(term.toLowerCase()));
+
+    remainingSearchTerms.forEach(searchTerm => {
         const textNodes = getTextNodes(lexicon);
         
          textNodes.forEach(node => {
