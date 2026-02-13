@@ -1,13 +1,19 @@
 .thelexicon-tst-popup {
-  min-height: 10em;
-  min-width: 10em;
-  position: absolute;
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 4px;
-  z-index: 1000;
+    min-height: 10em;
+    min-width: 10em;
+    position: absolute;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1000;
 }
 
 .highlight {
-  background-color: yellow;
+    background-color: #97c21c;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-radius: 5px;
+    color: white !important;
 }
