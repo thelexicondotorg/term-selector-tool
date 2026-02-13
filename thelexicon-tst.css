@@ -8,11 +8,6 @@
   z-index: 1000;
 }
 
-.lexicon {
-  width: 40%;
-  max-width: 800px;
-}
-
 .highlight {
   background-color: yellow;
 }
