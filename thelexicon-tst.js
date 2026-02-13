@@ -239,9 +239,10 @@ function highlightTextNode(textNode, searchTerm, channel) {
     }
 }
 
-async function highlightTerms(channel) {
+async function highlightTerms() {
     let selector = ".lexicon";
-    
+    const channel = document.querySelector('meta[name="tst-parent-taxonomy"]').getAttribute('content');
+
     const lexicon = document.querySelector(selector);
     let searchTerms = await termsByChannel(channel);
     
