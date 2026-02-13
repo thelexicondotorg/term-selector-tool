@@ -239,7 +239,9 @@ function highlightTextNode(textNode, searchTerm, channel) {
     }
 }
 
-async function highlightTerms(selector, channel) {
+async function highlightTerms(channel) {
+    let selector = ".lexicon";
+    
     const lexicon = document.querySelector(selector);
     let searchTerms = await termsByChannel(channel);
     
