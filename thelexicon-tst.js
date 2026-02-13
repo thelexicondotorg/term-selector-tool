@@ -162,12 +162,12 @@ async function getPopupContent(channel, searchTerm) {
 }
 
 async function showPopup(channel, searchTerm, event) {
-    const existingPopup = document.querySelector('.term-popup');
+    const existingPopup = document.querySelector('.thelexicon-tst-popup');
     if (existingPopup) {
         existingPopup.remove();
     }
     const popup = document.createElement('div');
-    popup.className = 'thelexicon-tst';
+    popup.className = 'thelexicon-tst-popup';
     popup.innerHTML = 'Loading...';
     popup.style.left = `${event.pageX + 10}px`;
     popup.style.top = `${event.pageY + 10}px`;
