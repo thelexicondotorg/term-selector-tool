@@ -1,11 +1,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta name="tst-active" content="1">
-    <meta name="tst-parent-taxonomy" content="Food is Medicine">
-    <meta name="tst-excluded-terms" content="diabetes, a random term">
-    <script src="thelexicon-tst.js"></script>
-    <link rel="stylesheet" href="thelexicon-tst.css" media="all" />
+    <meta name="thelexicon-tst-active" content="1">
+    <meta name="thelexicon-tst-parent-taxonomy" content="Food is Medicine">
+    <meta name="thelexicon-tst-excluded-terms" content="diabetes, a random term">
+    <script src="https://thelexicondotorg.github.io/term-selector-tool/thelexicon-tst.js"></script>
+    <link rel="stylesheet" href="https://thelexicondotorg.github.io/term-selector-tool/thelexicon-tst.css" media="all" />
   </head>
   <body>
     <h1>Can patients prescribed fruits and vegetables achieve better health outcomes?</h1>
@@ -20,7 +20,7 @@
       <p>Geisinger Health Plan elected Scranton, PA as its third Fresh Food Farmacy location. A Community Needs Assessment identified alarming rates of diabetes coupled with increasing food insecurity statistics in the area, where hunger, job security, transportation, and stable housing are the biggest social determinants that impact the health outcomes of Scranton residents. Without job security, individuals struggle to pay for the food they need. Lack of reliable transportation, coupled with numerous food deserts, leads many patients to rely on food service locations that may not always offer the most nutritious options. For those without stable housing, storing food acquired from local pantries can also be a challenge.</p>
     </div>
     <script>highlightTerms().then(async () => {
-    const channel = document.querySelector('meta[name="tst-parent-taxonomy"]').getAttribute('content');
+    const channel = document.querySelector('meta[name="thelexicon-tst-parent-taxonomy"]').getAttribute('content');
     const freshFoodSpan = Array.from(document.querySelectorAll('.highlight'))
         .find(span => span.dataset.term.toLowerCase() === 'fresh food farmacy');
     

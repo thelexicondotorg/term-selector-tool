@@ -238,7 +238,7 @@ function highlightTextNode(textNode, searchTerm, channel) {
 }
 
 function getExcludedTerms() {
-    let meta = document.querySelector('meta[name="tst-excluded-terms"]').getAttribute('content');
+    let meta = document.querySelector('meta[name="thelexicon-tst-excluded-terms"]').getAttribute('content');
 
     return meta
         .toLowerCase()
@@ -253,7 +253,7 @@ function getLexicon() {
 }
 
 function getChannel() {
-    return document.querySelector('meta[name="tst-parent-taxonomy"]').getAttribute('content');
+    return document.querySelector('meta[name="thelexicon-tst-parent-taxonomy"]').getAttribute('content');
 }
 
 async function getTermsToHighlight() {
