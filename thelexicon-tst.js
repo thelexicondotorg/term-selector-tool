@@ -227,13 +227,15 @@ function highlightTextNode(textNode, searchTerm, channel) {
     const html = text.replace(regex, match => `<span class="highlight" data-term="${searchTerm}">${match}</span>`);
     
     if (html !== text) {
-        const temp = document.createElement('div');
+        const temp = document.createElement('template');
         temp.innerHTML = html;
-      
-        temp.querySelectorAll('.highlight')
+
+        temp.content.querySelectorAll('.highlight')
             .forEach(span => makeTermClickable(span, channel));
-      
-        textNode.parentNode.replaceChild(temp, textNode);
+
+        textNode.parentNode.replaceChild(temp.content, textNode);
+
+
     }
 }
 
@@ -249,7 +251,7 @@ function getExcludedTerms() {
 
 function getLexicon() {
     const selector = ".thelexicon-tst";
-    return document.querySelector(selector);
+    return document.querySelectorAll(selector);
 }
 
 function getChannel() {
@@ -264,32 +266,35 @@ async function getTermsToHighlight() {
 }
 
 async function foundTerms() {
-    const textNodes = getTextNodes(getLexicon());
+    const lexicons = getLexicon();
     const termsToHighlight = await getTermsToHighlight();
-    
+
     let found = termsToHighlight.filter(searchTerm => {
         const regex = new RegExp(`\\b${searchTerm}\\b`, 'gi');
-        return textNodes.some(node => regex.test(node.textContent));
+        return [...lexicons].some(lexicon => {
+            const textNodes = getTextNodes(lexicon);
+            return textNodes.some(node => regex.test(node.textContent));
+        });
     });
 
     let unique = [...new Set(found)];
-
     alert(JSON.stringify(unique));
 }
 
 async function highlightTerms() {
     let isEnabled = document.querySelector('meta[name="thelexicon-tst-active"]').getAttribute('content');
-    if(isEnabled == "0") return;
+    if (isEnabled == "0") return;
 
-    
-    const lexicon = getLexicon();
+    const lexicons = getLexicon();
     const channel = getChannel();
     const termsToHighlight = await getTermsToHighlight();
-    
-    termsToHighlight.forEach(searchTerm => {
-        const textNodes = getTextNodes(lexicon); // freschi ad ogni iterazione
-        textNodes.forEach(node => {
-            highlightTextNode(node, searchTerm, channel);
+
+    lexicons.forEach((lexicon, index) => {
+        termsToHighlight.forEach(searchTerm => {
+            const textNodes = getTextNodes(lexicon);
+            textNodes.forEach(node => {
+                highlightTextNode(node, searchTerm, channel);
+            });
         });
     });
 }
