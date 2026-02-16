@@ -42,8 +42,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 531px;
-    height: 531px;
 }
 
 .popup-card-container.is-switched .popup-card-wrapper {
@@ -58,8 +56,10 @@
 }
 
 .popup-card {
-    width: 531px;
-    height: 531px;
+    width: 90vw;
+    max-width: 600px;
+    height: 90vh;
+    max-height: 600px;
     background-color: #EBEAEA;
     background-image: url("https://thelexicon.org/TERM-SELECTOR-TOOL/img/background.png");
     background-size: 160% auto;
@@ -67,7 +67,7 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-y: auto;
     position: absolute;
     top: 0;
     left: 0;
