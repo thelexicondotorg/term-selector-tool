@@ -168,8 +168,36 @@
     color: #000;
     margin: 0;
     max-width: 450px;
+
+    position: relative;
 }
 
+.popup-definition::before {
+    content: '';
+    position: absolute;
+    top: -2em;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    background-image: url('img/quote.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.4;
+}
+
+.popup-definition::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background-image: url('img/quote.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.4;
+    transform: rotate(180deg);
+}
 
 .popup-flip {
     position: absolute;
