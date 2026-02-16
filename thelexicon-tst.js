@@ -174,7 +174,7 @@ async function showPopup(channel, searchTerm, event) {
     
     const popup = document.createElement('div');
     popup.className = 'thelexicon-tst-popup';
-    popup.innerHTML = 'Loading...';
+    popup.innerHTML = '';
   
     document.body.appendChild(popup);
     
