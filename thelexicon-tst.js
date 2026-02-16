@@ -163,9 +163,15 @@ async function getPopupContent(channel, searchTerm) {
 
 async function showPopup(channel, searchTerm, event) {
     const existingPopup = document.querySelector('.thelexicon-tst-popup');
-    if (existingPopup) {
-        existingPopup.remove();
-    }
+    const existingOverlay = document.querySelector('.thelexicon-tst-overlay');
+    if (existingPopup) existingPopup.remove();
+    if (existingOverlay) existingOverlay.remove();
+
+    // Gray overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'thelexicon-tst-overlay';
+    document.body.appendChild(overlay);
+    
     const popup = document.createElement('div');
     popup.className = 'thelexicon-tst-popup';
     popup.innerHTML = 'Loading...';
@@ -177,15 +183,11 @@ async function showPopup(channel, searchTerm, event) {
 
     initializeCardFlip();
     
-    // Close popup when user clicks outside
-    setTimeout(() => {
-        document.addEventListener('click', function closePopup(e) {
-            if (!popup.contains(e.target)) {
-                popup.remove();
-                document.removeEventListener('click', closePopup);
-            }
-        });
-    }, 0);
+    overlay.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+    
 }
 
 function makeTermClickable(span, channel) {
