@@ -129,11 +129,11 @@
 }
 
 .popup-channel {
-    background-color: #000000;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-family: 'Trade Gothic', sans-serif;
+    background-color: #6B6B6B;
+    color: #E8E7E7;
+    padding: 6px 12px 0px 12px;
+    border-radius: 20px;
+    font-family: 'Fjalla One';
     font-size: 20px;
     text-transform: uppercase;
     text-align: right;
