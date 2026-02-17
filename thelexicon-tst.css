@@ -29,11 +29,11 @@
   pointer-events: none;
 }
 @font-face {
-    font-family: 'Trade Gothic';
+    font-family: 'Fjalla One';
     src: url('FjallaOne-Regular.ttf') format('truetype');
 }
 @font-face {
-    font-family: 'Fjalla One';
+    font-family: 'Trade Gothic';
     src: url('TradeGothicLTStd-BdCn20.otf') format('opentype');
 }
 
