@@ -111,16 +111,13 @@
 }
 
 .popup-body {
-    position: absolute;
-    top: 75px;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative; /* Changed from absolute to allow natural flow */
+    padding: 0px 40px 20px 40px;
+    height: auto;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding: 0 40px 20px 40px;
 }
 
 .popup-logo {
@@ -202,16 +199,27 @@
     transform: rotate(180deg);
 }
 
+.popup-dot-navigator, 
 .popup-flip {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    cursor: pointer;
-    z-index: 10;
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+}
+
+.popup-dot-navigator {
+    position: absolute !important; /* Absolute relative to the FOOTER only */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.popup-flip {
+    margin-left: auto;
 }
 
 .popup-flip-back {
-    left: 10px;
+    margin-right: auto;
 }
 
 .popup-flip img {
@@ -219,20 +227,17 @@
     width: auto;
 }
 
-
-.popup-dot-navigator {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
-    z-index: 10;
-}
-
-
 .popup-dot-navigator img {
     height: 15px;
     width: auto;
+}
+
+.popup-footer-controls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px; /* Space below the definition */
+    position: relative;
 }
 
 @keyframes rotate {
