@@ -111,13 +111,16 @@
 }
 
 .popup-body {
-    position: relative; /* Changed from absolute to allow natural flow */
-    padding: 0px 40px 20px 40px;
-    height: auto;
-    flex-grow: 1;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding: 0 40px 20px 40px;
 }
 
 .popup-logo {
@@ -130,9 +133,8 @@
     color: #E8E7E7;
     padding: 3px 12px 3px 12px;
     border-radius: 20px;
-    font-family: 'Work Sans';
-    font-weight: normal;
-    font-size: 14px;
+    font-family: 'Fjalla One';
+    font-size: 20px;
     text-align: right;
     max-width: fit-content;
 }
@@ -150,14 +152,14 @@
 .popup-term {
     background-color: #97C21C;
     color: white;
-    padding: 6px 12px 0px 12px;
+    padding: 6px 12px 6px 12px;
     border-radius: 8px;
-    font-family: 'Fjalla One';
-    font-weight: normal;
-    font-size: 20px;
+    font-family: 'Fjalla one', sans-serif;
+    font-size: 30px;
     text-transform: uppercase;
-    margin: 0 0 10px 0;
+    margin: 0 0 20px 0;
     text-align: center;
+    line-height: 1;
 }
 
 .popup-definition {
@@ -199,27 +201,16 @@
     transform: rotate(180deg);
 }
 
-.popup-dot-navigator, 
 .popup-flip {
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
-    transform: none !important;
-}
-
-.popup-dot-navigator {
-    position: absolute !important; /* Absolute relative to the FOOTER only */
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-}
-
-.popup-flip {
-    margin-left: auto;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .popup-flip-back {
-    margin-right: auto;
+    left: 10px;
 }
 
 .popup-flip img {
@@ -227,17 +218,20 @@
     width: auto;
 }
 
+
+.popup-dot-navigator {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 10;
+}
+
+
 .popup-dot-navigator img {
     height: 15px;
     width: auto;
-}
-
-.popup-footer-controls {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px; /* Space below the definition */
-    position: relative;
 }
 
 @keyframes rotate {
@@ -300,6 +294,17 @@
     font-size: 14px;
     font-weight: 500;
     color: #000;
+}
+
+.popup-body-back {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .popup-term-back {
