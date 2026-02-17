@@ -153,9 +153,10 @@
 .popup-term {
     background-color: #97C21C;
     color: white;
-    padding: 6px 12px 6px 12px;
+    padding: 6px 12px 0px 12px;
     border-radius: 8px;
     font-family: 'Fjalla One';
+    font-weight: normal;
     font-size: 20px;
     text-transform: uppercase;
     margin: 0 0 10px 0;
