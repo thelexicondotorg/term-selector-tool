@@ -131,12 +131,11 @@
 .popup-channel {
     background-color: #6B6B6B;
     color: #E8E7E7;
-    padding: 6px 12px 0px 12px;
+    padding: 3px 12px 3px 12px;
     border-radius: 20px;
     font-family: 'Work Sans';
     font-weight: normal;
     font-size: 14px;
-    text-transform: uppercase;
     text-align: right;
     max-width: fit-content;
 }
@@ -154,14 +153,13 @@
 .popup-term {
     background-color: #97C21C;
     color: white;
-    padding: 14px 20px 5px 20px;
+    padding: 6px 12px 6px 12px;
     border-radius: 8px;
-    font-family: 'Trade Gothic', sans-serif;
-    font-size: 30px;
+    font-family: 'Fjalla One';
+    font-size: 20px;
     text-transform: uppercase;
-    margin: 0 0 30px 0;
+    margin: 0 0 10px 0;
     text-align: center;
-    line-height: 1;
 }
 
 .popup-definition {
