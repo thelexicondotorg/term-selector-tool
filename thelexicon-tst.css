@@ -30,8 +30,11 @@
 }
 @font-face {
     font-family: 'Trade Gothic';
+    src: url('FjallaOne-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Fjalla One';
     src: url('TradeGothicLTStd-BdCn20.otf') format('opentype');
-    font-weight: bold;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Work+Sans:wght@400;500;700&display=swap');
