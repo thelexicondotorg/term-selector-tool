@@ -133,8 +133,10 @@
     color: #E8E7E7;
     padding: 3px 12px 3px 12px;
     border-radius: 20px;
-    font-family: 'Fjalla One';
-    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: normal;
     text-align: right;
     max-width: fit-content;
 }
@@ -154,8 +156,9 @@
     color: white;
     padding: 6px 12px 6px 12px;
     border-radius: 8px;
-    font-family: 'Fjalla one', sans-serif;
-    font-size: 30px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
     text-transform: uppercase;
     margin: 0 0 20px 0;
     text-align: center;
