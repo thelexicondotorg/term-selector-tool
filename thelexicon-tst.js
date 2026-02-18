@@ -216,7 +216,7 @@ function getTextNodes(root) {
 
 function createTermRegex(searchTerm) {
     const escapedTerm = escapeRegex(searchTerm);
-    return new RegExp(`(?<!\\w)${escapedTerm}(?!\\w)`, 'gi');
+    return new RegExp(`(?<!\\w)${escapedTerm}(?!\\w)`, 'i');
 }
 
 
@@ -234,8 +234,6 @@ function highlightTextNode(textNode, searchTerm, channel) {
             .forEach(span => makeTermClickable(span, channel));
 
         textNode.parentNode.replaceChild(temp.content, textNode);
-
-
     }
 }
 
@@ -289,12 +287,13 @@ async function highlightTerms() {
     const channel = getChannel();
     const termsToHighlight = await getTermsToHighlight();
 
-    lexicons.forEach((lexicon, index) => {
-        termsToHighlight.forEach(searchTerm => {
-            const textNodes = getTextNodes(lexicon);
-            textNodes.forEach(node => {
-                highlightTextNode(node, searchTerm, channel);
-            });
-        });
+    termsToHighlight.forEach(searchTerm => {
+        const allTextNodes = [...lexicons].flatMap(element => getTextNodes(element));
+        
+        const firstMatch = allTextNodes.find(node => createTermRegex(searchTerm).test(node.textContent));
+        
+        if (firstMatch) {
+            highlightTextNode(firstMatch, searchTerm, channel);
+        }
     });
 }
