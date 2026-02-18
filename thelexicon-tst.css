@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Work+Sans&display=swap');
+
 .highlight {
     text-transform: lowercase;
+    font-family: 'Fjalla One';
     background-color: #97c21c;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -29,16 +32,6 @@
   user-drag: none;
   pointer-events: none;
 }
-@font-face {
-    font-family: 'Fjalla One';
-    src: url('FjallaOne-Regular.ttf') format('truetype');
-}
-@font-face {
-    font-family: 'Trade Gothic';
-    src: url('TradeGothicLTStd-BdCn20.otf') format('opentype');
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Work+Sans&display=swap');
 
 .popup-card-container {
     perspective: 600px;
