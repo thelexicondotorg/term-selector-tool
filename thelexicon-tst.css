@@ -1,15 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Work+Sans&display=swap');
+@font-face {
+    font-family: 'Trade Gothic';
+    src: url('TradeGothicLTStd-BdCn20.otf') format('opentype');
+}
 
 .highlight {
     text-transform: lowercase;
-    font-family: 'Fjalla One';
+    font-family: 'Trade Gothic';
     background-color: #97c21c;
-    padding-top: 2px;
-    padding-bottom: 2px;
     padding-right: 5px;
     padding-left: 5px;
     border-radius: 5px;
     color: white !important;
+
+
+    /* Fix for https://github.com/thelexicondotorg/term-selector-tool/issues/43 */
+    position: relative;
+    top: -1px;
+    padding-top: 4px; /* asymmetric padding */
+    padding-bottom: 0px; 
 }
 
 .thelexicon-tst-popup {
