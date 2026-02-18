@@ -128,10 +128,10 @@
     height: auto;
 }
 
-.popup-channel {
+.popup-channel, .popup-channel-badge, .popup-channel-tag {
     background-color: #6B6B6B;
     color: #E8E7E7;
-    padding: 3px 12px 3px 12px;
+    padding: 5px 12px 3px 12px;
     border-radius: 20px;
     font-family: 'Work Sans', sans-serif;
     font-size: 14px;
@@ -154,7 +154,7 @@
 .popup-term {
     background-color: #97C21C;
     color: white;
-    padding: 6px 12px 6px 12px;
+    padding: 9px 12px 6px 12px;
     border-radius: 8px;
     font-family: 'Work Sans', sans-serif;
     font-size: 20px;
@@ -319,17 +319,18 @@
     color: #000;
 }
 
-.popup-channel-badge {
-    background-color: #000000;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-family: 'Trade Gothic', sans-serif;
-    font-size: 20px;
-    text-transform: uppercase;
-    width: fit-content;
-    margin-bottom: 15px;
-}
+/* .popup-channel-badge {
+    background-color: #6B6B6B;
+    color: #E8E7E7;
+    padding: 3px 12px 3px 12px;
+    border-radius: 20px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: normal;
+    text-align: right;
+    max-width: fit-content;
+} */
 
 .popup-channel-description {
     font-family: 'Work Sans', sans-serif;
@@ -358,7 +359,7 @@
     gap: 8px;
 }
 
-.popup-channel-tag {
+/* .popup-channel-tag {
     background-color: #000000;
     color: white;
     padding: 6px 12px;
@@ -368,7 +369,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s;
-}
+} */
 
 .popup-channel-tag:hover {
     background-color: #333333;
