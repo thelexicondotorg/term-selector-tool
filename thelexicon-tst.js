@@ -109,17 +109,25 @@ function initializeCardFlip() {
     const cardContainer = document.querySelector('.js-popup-card');
     const flipTriggers = document.querySelectorAll('.js-flip-trigger');
     let switching = false;
+    let isFlipped = false; // traccia lo stato corrente
 
     flipTriggers.forEach(trigger => {
         trigger.addEventListener('click', (e) => {
             e.stopPropagation();
             
-            if (switching) {
-                return false;
-            }
+            if (switching) return false;
             switching = true;
 
+            cardContainer.classList.remove('is-switching-to-back', 'is-switching-to-front');
+
+            if (!isFlipped) {
+                cardContainer.classList.add('is-switching-to-back');
+            } else {
+                cardContainer.classList.add('is-switching-to-front');
+            }
+
             cardContainer.classList.toggle('is-switched');
+            isFlipped = !isFlipped;
             
             setTimeout(() => {
                 const cards = cardContainer.querySelectorAll('.popup-card');
@@ -134,7 +142,7 @@ let popupTemplate = null;
 
 async function loadPopupTemplate() {
     if (!popupTemplate) {
-        const response = await fetch('https://thelexicondotorg.github.io/term-selector-tool/popup.html');
+        const response = await fetch('popup.html');
         popupTemplate = await response.text();
     }
     return popupTemplate;
