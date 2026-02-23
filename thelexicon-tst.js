@@ -3,7 +3,7 @@ const TABLE_ID = 'tblAuOlHMAQPjdhGM';
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
 
 class Term {
-    constructor(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality) {
+    constructor(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality, relatedTerms) {
         this.term = term;
         this.uid = uid;
         this.finalSvg = finalSvg;
@@ -12,6 +12,7 @@ class Term {
         this.definition = definition;
         this.designer = designer;
         this.designerNationality = designerNationality;
+        this.relatedTerms = relatedTerms;
     }
 }
 
@@ -61,7 +62,7 @@ async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
 async function fetchRecord(channel, searchTerm) {
     console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
-    const fields = ['TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality'];
+    const fields = ['TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
     const records = await fetchFromAirtable(formula, fields);
     
     if (records.length > 0) {
@@ -74,9 +75,10 @@ async function fetchRecord(channel, searchTerm) {
         let definition = firstRecord.fields.Definition;
         let designer = firstRecord.fields.DesignerLookup;
         let designerNationality = firstRecord.fields.Nationality[0];
+        let relatedTerms = firstRecord.fields["Related terms Lookup"];
 
-        let o = new Term(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality);
-        // console.log(JSON.stringify(o, null, 2))
+        let o = new Term(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality, relatedTerms);
+        console.log(JSON.stringify(o, null, 2))
         return o;
     }
     return null;
