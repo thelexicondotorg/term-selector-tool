@@ -221,9 +221,12 @@
 .popup-flip {
     position: absolute;
     bottom: 10px;
-    right: 10px;
     cursor: pointer;
     z-index: 10;
+}
+
+.popup-flip-front {
+    right: 10px;
 }
 
 .popup-flip-back {
