@@ -30,17 +30,23 @@
     <!-- BACK SIDE -->
     <div class="popup-card popup-card--back">
       <header class="popup-header-back">
+        <div class="popup-channel-badge">{{channel}}</div>
+      </header>
+
+      <div class="popup-icon-term-row">
         <div class="popup-icon-back">
           <img src="{{finalSvg}}" class="popup-icon">
         </div>
-        <div class="popup-designer">
-          <div class="popup-designer-name">Designed by {{designer}}</div>
-          <div class="popup-designer-country">{{designerNationality}}</div>
+        <div class="popup-header-back-info">
+          <h1 class="popup-term popup-term-back">{{term}}</h1>
+          <div class="popup-designer">
+            <div class="popup-designer-name">designed by {{designer}} ({{designerNationality}})</div>
+          </div>
         </div>
-      </header>
-  
+      </div>
+      
       <div class="popup-body-back">
-        <h1 class="popup-term popup-term-back">{{term}}</h1>
+
     
         <div class="popup-channel-badge">{{channel}}</div>
     

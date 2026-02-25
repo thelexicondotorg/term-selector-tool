@@ -172,7 +172,7 @@
 }
 
 .popup-term-back {
-    align-self: center;
+    align-self: left;
     width: fit-content;
 }
 
@@ -288,12 +288,40 @@
 /* BACK SIDE STYLES */
 .popup-header-back {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px 40px;
+    justify-content: flex-end;
+    padding: 20px 40px 0 40px;
     position: relative;
     z-index: 10;
 }
+
+.popup-icon-term-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 40px 20px 40px;
+}
+
+
+.popup-header-back-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.popup-term-back {
+    width: fit-content;
+    margin: 0;
+}
+
+
+.popup-header-back-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+
 
 .popup-icon-back {
     width: 100px;
@@ -311,9 +339,8 @@
 
 .popup-designer-name {
     font-size: 14px;
-    font-weight: 500;
-    color: #000;
-    margin-bottom: 2px;
+    font-weight: 400;
+    color: #666;
 }
 
 .popup-designer-country {
