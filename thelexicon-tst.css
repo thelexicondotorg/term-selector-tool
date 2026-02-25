@@ -153,7 +153,8 @@
 .popup-term {
     background-color: #97C21C;
     color: white;
-    padding: 9px 12px 6px 12px;
+    padding-left: 12px;
+    padding-right: 12px;
     border-radius: 8px;
     font-family: 'Trade Gothic';
     font-size: 20px;
@@ -168,8 +169,13 @@
     top: -1px;
     padding-top: 4px; /* asymmetric padding */
     padding-bottom: 0px; 
-
 }
+
+.popup-term-back {
+    align-self: center;
+    width: fit-content;
+}
+
 
 .popup-definition {
     font-family: 'Work Sans', sans-serif;
@@ -322,14 +328,6 @@
     flex-direction: column;
 }
 
-.popup-term-back {
-    font-family: 'Trade Gothic', sans-serif;
-    font-size: 38px;
-    text-transform: uppercase;
-    margin: 0 0 20px 0;
-    line-height: 1;
-    color: #000;
-}
 
 /* .popup-channel-badge {
     background-color: #6B6B6B;
