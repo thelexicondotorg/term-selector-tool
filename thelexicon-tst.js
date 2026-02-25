@@ -62,14 +62,14 @@ async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
 async function fetchRecord(channel, searchTerm) {
     console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
-    const fields = ['TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
+    const fields = ['UID', 'TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
     const records = await fetchFromAirtable(formula, fields);
     
     if (records.length > 0) {
         const firstRecord = records[0];
 
         let term = firstRecord.fields.TERM;
-        let uid = firstRecord.UID;
+        let uid = firstRecord.fields.UID;
         let finalSvg = firstRecord.fields["MASTER"][0].url;
         let otherChannels = firstRecord.fields.CHANNEL;
         let definition = firstRecord.fields.Definition;
@@ -78,7 +78,7 @@ async function fetchRecord(channel, searchTerm) {
         let relatedTerms = firstRecord.fields["Related terms Lookup"];
 
         let o = new Term(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality, relatedTerms);
-        console.log(JSON.stringify(o, null, 2))
+
         return o;
     }
     return null;
@@ -147,6 +147,7 @@ async function loadPopupTemplate() {
         const response = await fetch('popup.html');
         popupTemplate = await response.text();
     }
+
     return popupTemplate;
 }
 
@@ -162,6 +163,7 @@ async function getPopupContent(channel, searchTerm) {
 
     
     return template
+        .replace(/{{uid}}/g, content.uid)
         .replace(/{{channel}}/g, content.channel)
         .replace(/{{finalSvg}}/g, content.finalSvg)
         .replace(/{{term}}/g, content.term)
