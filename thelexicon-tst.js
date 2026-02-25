@@ -1,5 +1,7 @@
 const BASE_ID = 'appFTGzhkyFj0r9r1';
 const TERM_TABLE_ID = 'tblAuOlHMAQPjdhGM';
+const CHANNEL_TABLE_ID = 'tblXxfNlMvFAVaupt';
+
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
 
 class Term {
@@ -57,6 +59,19 @@ async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
     
     console.log(`Total records fetched: ${allRecords.length}`);
     return allRecords;
+}
+
+async function fetchChannelInfo(channel) {
+    const formula = `{name}="${channel}"`;
+    const records = await fetchFromAirtable(CHANNEL_TABLE_ID, formula);
+    
+    if (records.length > 0) {
+        const firstRecord = records[0];
+
+        console.log(JSON.stringify(firstRecord, null, 2));
+
+    }
+    return null;
 }
 
 async function fetchTerm(channel, searchTerm) {
