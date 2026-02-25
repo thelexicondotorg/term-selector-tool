@@ -33,12 +33,12 @@
 }
 
 .thelexicon-tst-popup img {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-  pointer-events: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
 }
 
 .popup-card-container {
@@ -76,8 +76,6 @@
 .popup-card {
     width: 90vw;
     max-width: 600px;
-    height: 90vh;
-    max-height: 600px;
     background-color: #EBEAEA;
     background-image: url("https://thelexicon.org/TERM-SELECTOR-TOOL/img/background.png");
     background-size: 160% auto;
@@ -116,16 +114,11 @@
 }
 
 .popup-body {
-    position: absolute;
-    top: 75px;
-    left: 0;
-    right: 0;
-    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 40px 20px 40px;
+    padding: 0 40px 40px 40px;
 }
 
 .popup-logo {
@@ -313,12 +306,7 @@
 }
 
 .popup-body-back {
-    position: absolute;
-    top: 150px;
-    left: 0;
-    right: 0;
-    bottom: 60px;
-    padding: 0 40px;
+    padding: 0 40px 60px 40px;
     display: flex;
     flex-direction: column;
 }
