@@ -1,5 +1,5 @@
 const BASE_ID = 'appFTGzhkyFj0r9r1';
-const TABLE_ID = 'tblAuOlHMAQPjdhGM';
+const TERM_TABLE_ID = 'tblAuOlHMAQPjdhGM';
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
 
 class Term {
@@ -22,7 +22,7 @@ async function fetchFromAirtable(filterFormula, fieldsToReturn = []) {
     let offset = null;
     
     do {
-        let url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
+        let url = `https://api.airtable.com/v0/${BASE_ID}/${TERM_TABLE_ID}?filterByFormula=${encodeURIComponent(filterFormula)}`;
         
         if (fieldsToReturn.length > 0) {
             const fieldsParam = fieldsToReturn.map(f => `fields[]=${encodeURIComponent(f)}`).join('&');
