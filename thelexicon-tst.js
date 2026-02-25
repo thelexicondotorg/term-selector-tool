@@ -59,7 +59,7 @@ async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
     return allRecords;
 }
 
-async function fetchRecord(channel, searchTerm) {
+async function fetchTerm(channel, searchTerm) {
     console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
     const fields = ['UID', 'TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
@@ -152,24 +152,24 @@ async function loadPopupTemplate() {
 }
 
 async function getPopupContent(channel, searchTerm) {
-    const content = await fetchRecord(channel, searchTerm);
+    const term = await fetchTerm(channel, searchTerm);
 
     const template = await loadPopupTemplate();
 
-    const otherChannelsHtml = content.otherChannels
-        .filter(ch => ch !== content.channel) // skip the current Channel
+    const otherChannelsHtml = term.otherChannels
+        .filter(ch => ch !== term.channel) // skip the current Channel
         .map(ch => `<span class="popup-channel-tag">${ch}</span>`)
         .join('');
 
     
     return template
-        .replace(/{{uid}}/g, content.uid)
-        .replace(/{{channel}}/g, content.channel)
-        .replace(/{{finalSvg}}/g, content.finalSvg)
-        .replace(/{{term}}/g, content.term)
-        .replace(/{{definition}}/g, content.definition)
-        .replace(/{{designer}}/g, content.designer)
-        .replace(/{{designerNationality}}/g, content.designerNationality)
+        .replace(/{{uid}}/g, term.uid)
+        .replace(/{{channel}}/g, term.channel)
+        .replace(/{{finalSvg}}/g, term.finalSvg)
+        .replace(/{{term}}/g, term.term)
+        .replace(/{{definition}}/g, term.definition)
+        .replace(/{{designer}}/g, term.designer)
+        .replace(/{{designerNationality}}/g, term.designerNationality)
         .replace(/{{otherChannelsHtml}}/g, otherChannelsHtml);
 }
 
