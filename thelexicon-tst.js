@@ -181,20 +181,19 @@ async function loadPopupTemplate() {
     return popupTemplate;
 }
 
-async function getPopupContent(channel, searchTerm) {
-    const term = await fetchTerm(channel, searchTerm);
+async function getPopupContent(channelInfo, searchTerm) {
+    const term = await fetchTerm(channelInfo.name, searchTerm);
 
     const template = await loadPopupTemplate();
 
     const otherChannelsHtml = term.otherChannels
-        .filter(ch => ch !== term.channel) // skip the current Channel
+        .filter(ch => ch !== channelInfo.name) // skip the current Channel
         .map(ch => `<span class="popup-channel-tag">${ch}</span>`)
         .join('');
 
-    
     return template
         .replace(/{{uid}}/g, String(term.uid).padStart(5, '0'))
-        .replace(/{{channel}}/g, term.channel)
+        .replace(/{{channel}}/g, channelInfo.name)
         .replace(/{{finalSvg}}/g, term.finalSvg)
         .replace(/{{term}}/g, term.term)
         .replace(/{{definition}}/g, term.definition)
@@ -203,7 +202,8 @@ async function getPopupContent(channel, searchTerm) {
         .replace(/{{otherChannelsHtml}}/g, otherChannelsHtml);
 }
 
-async function showPopup(channel, searchTerm, event) {
+async function showPopup(channelInfo, searchTerm, event) {
+
     const existingPopup = document.querySelector('.thelexicon-tst-popup');
     const existingOverlay = document.querySelector('.thelexicon-tst-overlay');
     if (existingPopup) existingPopup.remove();
@@ -220,7 +220,7 @@ async function showPopup(channel, searchTerm, event) {
   
     document.body.appendChild(popup);
     
-    popup.innerHTML = await getPopupContent(channel, searchTerm);
+    popup.innerHTML = await getPopupContent(channelInfo, searchTerm);
 
 
     initializeCardFlip();
@@ -232,11 +232,12 @@ async function showPopup(channel, searchTerm, event) {
     
 }
 
-function makeTermClickable(span, channel) {
+function makeTermClickable(span, channelInfo) {
+
     span.style.cursor = 'pointer';
     span.addEventListener('click', async (e) => {
         e.stopPropagation();
-        await showPopup(channel, span.dataset.term, e);
+        await showPopup(channelInfo, span.dataset.term, e);
     });    
 }
 
@@ -263,7 +264,8 @@ function createTermRegex(searchTerm) {
 
 
 
-function highlightTextNode(textNode, searchTerm, channel) {
+function highlightTextNode(textNode, searchTerm, channelInfo) {
+
     const text = textNode.textContent;
     const regex = createTermRegex(searchTerm);
     const html = text.replace(regex, match => `<span class="highlight" data-term="${searchTerm}">${match}</span>`);
@@ -273,7 +275,7 @@ function highlightTextNode(textNode, searchTerm, channel) {
         temp.innerHTML = html;
 
         temp.content.querySelectorAll('.highlight')
-            .forEach(span => makeTermClickable(span, channel));
+            .forEach(span => makeTermClickable(span, channelInfo));
 
         textNode.parentNode.replaceChild(temp.content, textNode);
     }
@@ -327,6 +329,8 @@ async function highlightTerms() {
 
     const lexicons = getLexicon();
     const channel = getChannel();
+    const channelInfo = await fetchChannelInfo(channel);
+
     const termsToHighlight = await getTermsToHighlight();
 
     termsToHighlight.forEach(searchTerm => {
@@ -335,7 +339,7 @@ async function highlightTerms() {
         const firstMatch = allTextNodes.find(node => createTermRegex(searchTerm).test(node.textContent));
         
         if (firstMatch) {
-            highlightTextNode(firstMatch, searchTerm, channel);
+            highlightTextNode(firstMatch, searchTerm, channelInfo);
         }
     });
 }
