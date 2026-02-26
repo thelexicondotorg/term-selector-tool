@@ -63,6 +63,7 @@ async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
 
 async function fetchChannelInfo(channel) {
     const formula = `{name}="${channel}"`;
+    const fields = ['Name', 'Channel Definition', 'Color (HEX value)'];
     const records = await fetchFromAirtable(CHANNEL_TABLE_ID, formula);
     
     if (records.length > 0) {
