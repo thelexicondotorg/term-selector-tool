@@ -41,7 +41,7 @@
         .find(span => span.dataset.term.toLowerCase() === 'fresh food farmacy');
     
     if (freshFoodSpan) {
-        await showPopup(new Channel(channel, "some description", "ff0000"), freshFoodSpan.dataset.term, { pageX: 400, pageY: 300 });
+        await showPopup(new Channel(channel, "some description", "#006d72"), freshFoodSpan.dataset.term, { pageX: 400, pageY: 300 });
     }
 });
     </script>

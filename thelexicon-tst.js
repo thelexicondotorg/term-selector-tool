@@ -194,6 +194,8 @@ async function getPopupContent(channelInfo, searchTerm) {
     return template
         .replace(/{{uid}}/g, String(term.uid).padStart(5, '0'))
         .replace(/{{channel}}/g, channelInfo.name)
+        .replace(/{{channel.description}}/g, channelInfo.description)
+        .replace(/{{channel.color}}/g, channelInfo.color)
         .replace(/{{finalSvg}}/g, term.finalSvg)
         .replace(/{{term}}/g, term.term)
         .replace(/{{definition}}/g, term.definition)
