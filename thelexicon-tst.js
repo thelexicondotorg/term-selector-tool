@@ -18,6 +18,14 @@ class Term {
     }
 }
 
+class Channel {
+    constructor(name, definition, color) {
+        this.name = name;
+        this.definition = definition;
+        this.color = color;
+    }
+}
+
 
 async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
     let allRecords = [];
@@ -69,7 +77,13 @@ async function fetchChannelInfo(channel) {
     if (records.length > 0) {
         const firstRecord = records[0];
 
-        console.log(JSON.stringify(firstRecord, null, 2));
+        let name = firstRecord.fields['Name'];
+        let definition = firstRecord.fields['Channel Definition'];
+        let color = '#' + firstRecord.fields["Color (HEX value)"];
+        
+        let o = new Channel(name, definition, color);
+        console.log(JSON.stringify(o, null, 2));
+        return o;
 
     }
     return null;
