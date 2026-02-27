@@ -5,11 +5,11 @@ const CHANNEL_TABLE_ID = 'tblXxfNlMvFAVaupt';
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
 
 class Term {
-    constructor(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality, relatedTerms) {
+    constructor(term, uid, finalSvg, channelInfo, otherChannels, definition, designer, designerNationality, relatedTerms) {
         this.term = term;
         this.uid = uid;
         this.finalSvg = finalSvg;
-        this.channel = channel;
+        this.channelInfo = channelInfo;
         this.otherChannels = otherChannels;
         this.definition = definition;
         this.designer = designer;
@@ -89,7 +89,7 @@ async function fetchChannelInfo(channel) {
     return null;
 }
 
-async function fetchTerm(channel, searchTerm) {
+async function fetchTerm(channelInfo, searchTerm) {
     console.log("Searching for: " + searchTerm);
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
     const fields = ['UID', 'TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
@@ -107,7 +107,7 @@ async function fetchTerm(channel, searchTerm) {
         let designerNationality = firstRecord.fields.Nationality[0];
         let relatedTerms = firstRecord.fields["Related terms Lookup"];
 
-        let o = new Term(term, uid, finalSvg, channel, otherChannels, definition, designer, designerNationality, relatedTerms);
+        let o = new Term(term, uid, finalSvg, channelInfo, otherChannels, definition, designer, designerNationality, relatedTerms);
 
         return o;
     }
@@ -194,7 +194,7 @@ async function getPopupContent(channelInfo, searchTerm) {
     return template
         .replace(/{{uid}}/g, String(term.uid).padStart(5, '0'))
         .replace(/{{channel}}/g, channelInfo.name)
-        .replace(/{{channel.description}}/g, channelInfo.description)
+        .replace(/{{channel.definition}}/g, channelInfo.definition)
         .replace(/{{channel.color}}/g, channelInfo.color)
         .replace(/{{finalSvg}}/g, term.finalSvg)
         .replace(/{{term}}/g, term.term)
