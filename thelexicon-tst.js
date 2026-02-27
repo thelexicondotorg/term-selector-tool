@@ -188,12 +188,23 @@ async function getPopupContent(channelInfo, searchTerm) {
 
     const template = await loadPopupTemplate();
 
+
+
+    // Other channels section
     const otherChannelsHtml = term.otherChannels
         .filter(ch => ch !== channelInfo.name) // skip the current Channel
         .map(ch => `<span class="popup-channel-tag">${ch}</span>`)
         .join('');
 
-
+    const otherChannelsSection = term.otherChannels.length
+        ? `<div class="popup-also-appears">
+          <h3 class="popup-also-title">Also appears in</h3>
+          <div class="popup-other-channels">
+            ${otherChannelsHtml}
+          </div>
+        </div>`
+        : '';
+    
     // Build the whole Related Terms section.
     // Skip the whole section if there are no Related Terms.
     // Limit the number of Related Terms to 3.
@@ -222,7 +233,7 @@ async function getPopupContent(channelInfo, searchTerm) {
         .replace(/{{definition}}/g, term.definition)
         .replace(/{{designer}}/g, term.designer)
         .replace(/{{designerNationality}}/g, term.designerNationality)
-        .replace(/{{otherChannelsHtml}}/g, otherChannelsHtml)
+        .replace(/{{otherChannelsSection}}/g, otherChannelsSection)
         .replace(/{{relatedTermsSection}}/g, relatedTermsSection);
 }
 
