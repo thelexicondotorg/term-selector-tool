@@ -49,6 +49,11 @@
     transform: translate(-50%, -50%);
 }
 
+.popup-card-container a, .popup-card-container a:visited {
+    color: #717171;
+}
+
+
 .popup-card-container.is-switching-to-back .popup-card-wrapper {
     animation: rotate 0.5s linear both;
 }
@@ -374,7 +379,7 @@
 
 /* Also appears in other channels */
 
-.popup-also-appears {
+.popup-section {
     margin-top: 1em;;
 }
 
@@ -386,9 +391,6 @@
 
 /* Related terms */
 
-.popup-related-terms-container {
-    margin-top: auto;
-}
 
 .popup-related-terms {
     display: flex;
