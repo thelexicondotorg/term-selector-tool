@@ -126,7 +126,7 @@
     height: auto;
 }
 
-.popup-channel, .popup-channel-badge, .popup-channel-tag {
+.popup-channel, .popup-channel-badge {
     padding: 5px 12px 5px 12px;
     border-radius: 20px;
     font-family: 'Work Sans', sans-serif;
@@ -401,22 +401,4 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-}
-
-
-
-/* .popup-channel-tag {
-    background-color: #000000;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-} */
-
-.popup-channel-tag:hover {
-    background-color: #333333;
 }
