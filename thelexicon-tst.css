@@ -374,15 +374,17 @@
     margin: 0 0 25px 0;
 }
 
+
+/* Also appears in other channels */
+
 .popup-also-appears {
     margin-top: auto;
 }
 
 .popup-also-title {
     font-family: 'Work Sans', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
-    text-transform: uppercase;
     margin: 0 0 10px 0;
     color: #000;
 }
@@ -392,6 +394,28 @@
     flex-wrap: wrap;
     gap: 8px;
 }
+
+/* Related terms */
+
+.popup-related-terms-container {
+    margin-top: auto;
+}
+
+.popup-related-terms-title {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+.popup-related-terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
 
 /* .popup-channel-tag {
     background-color: #000000;
