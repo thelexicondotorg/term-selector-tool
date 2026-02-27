@@ -191,14 +191,23 @@ async function getPopupContent(channelInfo, searchTerm) {
 
 
     // Other channels section
-    const otherChannelsHtml = term.otherChannels
-        .filter(ch => ch !== channelInfo.name) // skip the current Channel
-        .map(ch => `<span class="popup-channel-tag">${ch}</span>`)
+
+    const otherChannelNames = term.otherChannels
+        .filter(ch => ch !== channelInfo.name); // skip the current channel
+
+    // read color codes for all channels
+    const otherChannelInfos = await Promise.all(
+        otherChannelNames.map(ch => fetchChannelInfo(ch))
+    );
+
+    const otherChannelsHtml = otherChannelInfos
+        .filter(ci => ci !== null)
+        .map(ci => `<div class="popup-channel" style="color:${ci.color}; border: 1px solid ${ci.color};">${ci.name}</div>`)
         .join('');
 
     const otherChannelsSection = term.otherChannels.length
         ? `<div class="popup-also-appears">
-          <h3 class="popup-also-title">Also appears in</h3>
+          <h3 class="popup-also-title">Also used in</h3>
           <div class="popup-other-channels">
             ${otherChannelsHtml}
           </div>
