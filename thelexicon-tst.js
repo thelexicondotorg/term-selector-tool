@@ -207,7 +207,7 @@ async function getPopupContent(channelInfo, searchTerm) {
 
     const otherChannelsSection = term.otherChannels.length
         ? `<div class="popup-also-appears">
-          <h3 class="popup-also-title">Also used in</h3>
+          <h3 class="popup-title">Also used in</h3>
           <div class="popup-other-channels">
             ${otherChannelsHtml}
           </div>
@@ -225,7 +225,7 @@ async function getPopupContent(channelInfo, searchTerm) {
     
     const relatedTermsSection = term.relatedTerms?.length
         ? `<div class="popup-related-terms-container">
-        <h3 class="popup-related-terms-title">Related ${channelInfo.name} terms</h3>
+        <h3 class="popup-title">Related ${channelInfo.name} terms</h3>
         <div class="popup-related-terms">
            ${relatedTermsToDisplay.map(t => `<span class="popup-term popup-term-back">${t}</span>`).join('')}
            </div>

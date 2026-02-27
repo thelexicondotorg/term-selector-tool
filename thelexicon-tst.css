@@ -126,7 +126,7 @@
     height: auto;
 }
 
-.popup-channel, .popup-channel-badge {
+.popup-channel-badge {
     padding: 5px 12px 5px 12px;
     border-radius: 20px;
     font-family: 'Work Sans', sans-serif;
@@ -363,18 +363,19 @@
 }
 
 
-/* Also appears in other channels */
-
-.popup-also-appears {
-    margin-top: 1em;;
-}
-
-.popup-also-title {
+.popup-title {
     font-family: 'Work Sans', sans-serif;
     font-size: 14px;
     font-weight: 700;
     margin: 0 0 10px 0;
     color: #000;
+}
+
+
+/* Also appears in other channels */
+
+.popup-also-appears {
+    margin-top: 1em;;
 }
 
 .popup-other-channels {
@@ -387,14 +388,6 @@
 
 .popup-related-terms-container {
     margin-top: auto;
-}
-
-.popup-related-terms-title {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    margin: 0 0 10px 0;
-    color: #000;
 }
 
 .popup-related-terms {
