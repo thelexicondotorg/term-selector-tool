@@ -326,9 +326,12 @@ function highlightTextNode(textNode, searchTerm, channelInfo) {
 }
 
 function getExcludedTerms() {
-    let meta = document.querySelector('meta[name="thelexicon-tst-excluded-terms"]').getAttribute('content');
+    let meta = document.querySelector('meta[name="thelexicon-tst-excluded-terms"]');
 
+    if(meta == null) return [];
+        
     return meta
+        .getAttribute('content')
         .toLowerCase()
         .split(',')
         .map(term => term.trim())
