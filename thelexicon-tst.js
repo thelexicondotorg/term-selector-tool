@@ -103,8 +103,8 @@ async function fetchTerm(channelInfo, searchTerm) {
         let finalSvg = firstRecord.fields["MASTER"][0].url;
         let otherChannels = firstRecord.fields.CHANNEL;
         let definition = firstRecord.fields.Definition ?? "";
-        let designer = firstRecord.fields.DesignerLookup ?? "";
-        let designerNationality = firstRecord.fields.Nationality?.[0] ?? "";;
+        let designer = firstRecord.fields.DesignerLookup ?? "Lex Icons™ Community";
+        let designerNationality = firstRecord.fields.Nationality?.[0] ?? "USA";;
         let relatedTerms = firstRecord.fields["Related terms Lookup"];
 
         let o = new Term(term, uid, finalSvg, channelInfo, otherChannels, definition, designer, designerNationality, relatedTerms);
