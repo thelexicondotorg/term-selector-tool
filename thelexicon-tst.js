@@ -202,7 +202,7 @@ async function getPopupContent(channelInfo, searchTerm) {
 
     const otherChannelsHtml = otherChannelInfos
         .filter(ci => ci !== null)
-        .map(ci => `<div class="popup-channel" style="color:${ci.color}; border: 1px solid ${ci.color};">${ci.name}</div>`)
+        .map(ci => `<div class="popup-channel-badge" style="color:${ci.color}; border: 1px solid ${ci.color};">${ci.name}</div>`)
         .join('');
 
     const otherChannelsSection = term.otherChannels.length
