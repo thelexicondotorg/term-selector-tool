@@ -182,7 +182,7 @@
 .popup-definition {
     font-family: 'Work Sans', sans-serif;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.4em;
     text-align: center;
     color: #000;
     margin: 0;
@@ -362,7 +362,7 @@
 .popup-channel-description {
     font-family: 'Work Sans', sans-serif;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.4em;
     color: #000;
     margin: 0 0 25px 0;
 }

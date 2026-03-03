@@ -174,7 +174,7 @@ let popupTemplate = null;
 
 async function loadPopupTemplate() {
     if (!popupTemplate) {
-        const response = await fetch('https://thelexicondotorg.github.io/term-selector-tool/popup.html');
+        const response = await fetch('popup.html');
         popupTemplate = await response.text();
     }
 
