@@ -22,7 +22,6 @@ class Channel {
     constructor(name, definition, color) {
         this.name = name;
         this.definition = definition;
-        this.color = color;
     }
 }
 
@@ -71,7 +70,7 @@ async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
 
 async function fetchChannelInfo(channel) {
     const formula = `{name}="${channel}"`;
-    const fields = ['Name', 'Channel Definition', 'Color (HEX value)'];
+    const fields = ['Name', 'Channel Definition'];
     const records = await fetchFromAirtable(CHANNEL_TABLE_ID, formula);
     
     if (records.length > 0) {
@@ -79,9 +78,8 @@ async function fetchChannelInfo(channel) {
 
         let name = firstRecord.fields['Name'];
         let definition = firstRecord.fields['Channel Definition'];
-        let color = '#' + firstRecord.fields["Color (HEX value)"];
         
-        let o = new Channel(name, definition, color);
+        let o = new Channel(name, definition);
         console.log(JSON.stringify(o, null, 2));
         return o;
 
@@ -236,7 +234,6 @@ async function getPopupContent(channelInfo, searchTerm) {
         .replace(/{{uid}}/g, String(term.uid).padStart(5, '0'))
         .replace(/{{channel}}/g, channelInfo.name)
         .replace(/{{channel.definition}}/g, channelInfo.definition)
-        .replace(/{{channel.color}}/g, channelInfo.color)
         .replace(/{{finalSvg}}/g, term.finalSvg)
         .replace(/{{term}}/g, term.term)
         .replace(/{{definition}}/g, term.definition)

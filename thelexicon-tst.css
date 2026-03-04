@@ -133,6 +133,7 @@
 
 .popup-channel-badge {
     padding: 5px 12px 5px 12px;
+    border: 1px solid black;
     border-radius: 20px;
     font-family: 'Work Sans', sans-serif;
     font-size: 14px;
