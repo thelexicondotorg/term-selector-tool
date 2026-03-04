@@ -7,17 +7,20 @@
     text-transform: lowercase;
     font-family: 'Trade Gothic';
     background-color: #97c21c;
-    padding-right: 5px;
-    padding-left: 5px;
     border-radius: 5px;
     color: white !important;
 
 
     /* Fix for https://github.com/thelexicondotorg/term-selector-tool/issues/43 */
     position: relative;
-    top: -1px;
-    padding-top: 4px; /* asymmetric padding */
-    padding-bottom: 0px; 
+
+
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    border-radius: 4px;
+    top: 0px;
 }
 
 .thelexicon-tst-popup {
