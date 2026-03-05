@@ -384,7 +384,10 @@ async function highlightTerms() {
     termsToHighlight.forEach(searchTerm => {
         const allTextNodes = [...lexicons].flatMap(element => getTextNodes(element));
         
-        const firstMatch = allTextNodes.find(node => createTermRegex(searchTerm).test(node.textContent));
+        const firstMatch = allTextNodes.find(node => {
+            if (node.parentNode.closest('a')) return false;
+            return createTermRegex(searchTerm).test(node.textContent);
+        });
         
         if (firstMatch) {
             highlightTextNode(firstMatch, searchTerm, channelInfo);
