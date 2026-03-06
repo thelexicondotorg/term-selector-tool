@@ -106,6 +106,33 @@
     -webkit-overflow-scrolling: touch;
 }
 
+/* Gradient Fade Overlay */
+.popup-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* 60px is usually the sweet spot to cover the buttons without hiding too much text */
+    height: 60px; 
+    
+    /* Transitions from the card's background color (#EBEAEA) to transparent */
+    background: linear-gradient(to top, 
+        #EBEAEA 20%, 
+        rgba(235, 234, 234, 0.8) 50%, 
+        transparent 100%
+    );
+    
+    /* Crucial: prevents the fade from blocking clicks to the buttons or links */
+    pointer-events: none; 
+    
+    /* Match the card's rounded corners at the bottom */
+    border-radius: 0 0 20px 20px;
+    
+    /* Sit above the scrolling text but below the fixed buttons (z-index 20) */
+    z-index: 15; 
+}
+
 .popup-card,
 .popup-card > * {
     backface-visibility: hidden;
