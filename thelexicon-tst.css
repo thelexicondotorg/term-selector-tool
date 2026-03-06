@@ -401,7 +401,7 @@
     padding: 0 40px 80px 40px;
     display: flex;
     flex: 1;
-    overflow-yu: auto;
+    overflow-y: auto;
     overflow-x: hidden;
     flex-direction: column;
     -webkit-overflow-scrolling: touch;
