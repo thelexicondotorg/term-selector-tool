@@ -47,12 +47,12 @@
 .popup-card-container {
     perspective: 1000px;
     position: fixed;
-    top: 50%;
+    top: calc(50% + 40px);
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90vw;
     max-width: 600px;
-    height: calc(100vh - 80px); 
+    max-height: calc(100vh - 110px); 
     z-index: 100;
 }
 
@@ -88,7 +88,8 @@
 
 .popup-card {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: calc(100vh - 110px);
     background-color: #EBEAEA;
     background-image: url("https://thelexicon.org/TERM-SELECTOR-TOOL/img/background.png");
     background-size: cover;
@@ -130,10 +131,12 @@
 
 .popup-body {
     display: flex;
+    flex: 1 1 auto;
+    overflow-y: auto;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 40px 40px 40px;
+    padding: 20px 40px 60px 40px;
 }
 
 .popup-logo {
