@@ -19,9 +19,10 @@ class Term {
 }
 
 class Channel {
-    constructor(name, definition, color) {
+    constructor(name, definition, link) {
         this.name = name;
         this.definition = definition;
+        this.link = link;
     }
 }
 
@@ -70,7 +71,7 @@ async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
 
 async function fetchChannelInfo(channel) {
     const formula = `{name}="${channel}"`;
-    const fields = ['Name', 'Channel Definition'];
+    const fields = ['Name', 'Channel Definition', 'External Link'];
     const records = await fetchFromAirtable(CHANNEL_TABLE_ID, formula);
     
     if (records.length > 0) {
@@ -78,8 +79,9 @@ async function fetchChannelInfo(channel) {
 
         let name = firstRecord.fields['Name'];
         let definition = firstRecord.fields['Channel Definition'];
+        let link =  firstRecord.fields['External Link'];
         
-        let o = new Channel(name, definition);
+        let o = new Channel(name, definition, link);
         console.log(JSON.stringify(o, null, 2));
         return o;
 
@@ -204,7 +206,7 @@ async function getPopupContent(channelInfo, searchTerm) {
 
     const otherChannelsHtml = otherChannelInfos
         .filter(ci => ci !== null)
-        .map(ci => `<div class="popup-channel-badge" style="color:${ci.color}; border: 1px solid ${ci.color};">${ci.name}</div>`)
+        .map(ci => `<div class="popup-channel-badge" style="color:${ci.color}; border: 1px solid ${ci.color};"><a href=${ci.link} target="_blank" rel="noopener noreferrer">${ci.name}</a></div>`)
         .join('');
 
     const otherChannelsSection = term.otherChannels.length
@@ -238,6 +240,7 @@ async function getPopupContent(channelInfo, searchTerm) {
         .replace(/{{uid}}/g, String(term.uid).padStart(5, '0'))
         .replace(/{{channel}}/g, channelInfo.name)
         .replace(/{{channel.definition}}/g, channelInfo.definition)
+        .replace(/{{channel.link}}/g, channelInfo.link)
         .replace(/{{finalSvg}}/g, term.finalSvg)
         .replace(/{{term}}/g, term.term)
         .replace(/{{definition}}/g, term.definition)
