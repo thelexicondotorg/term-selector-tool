@@ -79,7 +79,7 @@ async function fetchChannelInfo(channel) {
 
         let name = firstRecord.fields['Name'];
         let definition = firstRecord.fields['Channel Definition'];
-        let link =  firstRecord.fields['External Link'];
+        let link =  firstRecord.fields['External Link'] ?? "https://lexiconoffood.com/lex-icons/library/";
         
         let o = new Channel(name, definition, link);
         console.log(JSON.stringify(o, null, 2));
