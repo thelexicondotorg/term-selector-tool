@@ -108,6 +108,7 @@
     left: 0;
     backface-visibility: hidden;
     -webkit-overflow-scrolling: touch;
+    padding: 20px;
 }
 
 /* Gradient Fade Overlay */
@@ -419,7 +420,7 @@
     transform: translate(-50%);
     bottom: 20px;
     z-index: 20;
-    width: calc(100% - 40px);
+    width: calc(100% - 80px);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -470,3 +471,12 @@
 }
 
 
+.tst-close {
+    position: absolute;
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+}
+.tst-close a {
+    text-decoration: none;
+}

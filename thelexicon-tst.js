@@ -261,13 +261,17 @@ async function getPopupContent(channelInfo, searchTerm) {
         .replace(/{{relatedTermsSection}}/g, relatedTermsSection);
 }
 
-async function showPopup(channelInfo, searchTerm, event) {
-
+function closePopup() {
     const existingPopup = document.querySelector('.thelexicon-tst-popup');
     const existingOverlay = document.querySelector('.thelexicon-tst-overlay');
     if (existingPopup) existingPopup.remove();
-    if (existingOverlay) existingOverlay.remove();
+    if (existingOverlay) existingOverlay.remove();    
+}
 
+async function showPopup(channelInfo, searchTerm, event) {
+
+    closePopup();
+    
     // Gray overlay
     const overlay = document.createElement('div');
     overlay.className = 'thelexicon-tst-overlay';
