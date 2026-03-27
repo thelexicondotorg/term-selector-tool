@@ -61,11 +61,11 @@
 }
 
 
-.popup-card-container.is-switching-to-back .popup-card-wrapper {
+.popup-card-container.tst-is-switching-to-back .popup-card-wrapper {
     animation: rotate 0.5s linear both;
 }
 
-.popup-card-container.is-switching-to-front .popup-card-wrapper {
+.popup-card-container.tst-is-switching-to-front .popup-card-wrapper {
     animation: rotate-inverse 0.5s linear both;
 }
 
@@ -139,7 +139,7 @@
     transform-style: preserve-3d;
 }
 
-.popup-card.is-active {
+.popup-card.tst-is-active {
     position: static;
 }
 

@@ -156,20 +156,20 @@ function initializeCardFlip() {
             if (switching) return false;
             switching = true;
 
-            cardContainer.classList.remove('is-switching-to-back', 'is-switching-to-front');
+            cardContainer.classList.remove('tst-is-switching-to-back', 'tst-is-switching-to-front');
 
             if (!isFlipped) {
-                cardContainer.classList.add('is-switching-to-back');
+                cardContainer.classList.add('tst-is-switching-to-back');
             } else {
-                cardContainer.classList.add('is-switching-to-front');
+                cardContainer.classList.add('tst-is-switching-to-front');
             }
 
-            cardContainer.classList.toggle('is-switched');
+            cardContainer.classList.toggle('tst-is-switched');
             isFlipped = !isFlipped;
             
             setTimeout(() => {
                 const cards = cardContainer.querySelectorAll('.popup-card');
-                cards.forEach(card => card.classList.toggle('is-active'));
+                cards.forEach(card => card.classList.toggle('tst-is-active'));
                 switching = false;
             }, cardTransitionTime / 2);
         });
