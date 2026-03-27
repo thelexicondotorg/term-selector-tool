@@ -437,7 +437,9 @@
 }
 
 .tst-bottomline {
-    font-size: 8px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10px;
+    color: #6B6B6B;
 }
 
 .tst-bottomline a {
