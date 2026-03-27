@@ -144,7 +144,7 @@ function escapeRegex(str) {
 
 function initializeCardFlip() {
     const cardTransitionTime = 500;
-    const cardContainer = document.querySelector('.js-popup-card');
+    const cardContainer = document.querySelector('.tst-js-popup-card');
     const flipTriggers = document.querySelectorAll('.js-flip-trigger');
     let switching = false;
     let isFlipped = false; // traccia lo stato corrente
