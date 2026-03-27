@@ -96,7 +96,7 @@ async function fetchTerm(channelInfo, searchTerm) {
     if(DEBUG) console.log("Searching for: " + searchTerm);
     
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
-    const fields = ['UID', 'TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
+    const fields = ['UID', 'TERM', 'MASTER', 'CHANNEL NAME (Lookup)', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
     const records = await fetchFromAirtable(TERM_TABLE_ID, formula, fields);
     
     if (records.length > 0) {
@@ -107,7 +107,7 @@ async function fetchTerm(channelInfo, searchTerm) {
         let term = firstRecord.fields.TERM;
         let uid = firstRecord.fields.UID;
         let finalSvg = firstRecord.fields["MASTER"][0].url;
-        let otherChannels = firstRecord.fields.CHANNEL;
+        let otherChannels = firstRecord.fields["CHANNEL NAME (Lookup)"];
         let definition = firstRecord.fields.Definition ?? "";
         let designer = firstRecord.fields.DesignerLookup ?? "Lex Icons™ Community";
         let designerNationality = firstRecord.fields.Nationality?.[0] ?? "USA";;
