@@ -433,8 +433,5 @@
     font-size: 20px;
     top: 10px;
     right: 10px;
-}
-
-.tst-close a {
-    text-decoration: none;
+    cursor: pointer;   
 }
