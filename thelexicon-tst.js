@@ -1,5 +1,6 @@
 const BASE_ID = 'appFTGzhkyFj0r9r1';
 const TERM_TABLE_ID = 'tblAuOlHMAQPjdhGM';
+const TERM_VIEW_ID = "viwUkjPqNlJBMCMYX";
 const CHANNEL_TABLE_ID = 'tblXxfNlMvFAVaupt';
 
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
@@ -29,12 +30,15 @@ class Channel {
 }
 
 
-async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
+async function fetchFromAirtable(table, filterFormula, fieldsToReturn = [], withView = null) {
     let allRecords = [];
     let offset = null;
     
     do {
         let url = `https://api.airtable.com/v0/${BASE_ID}/${table}?filterByFormula=${encodeURIComponent(filterFormula)}`;
+
+        if(withView)
+            url += `&view=${encodeURIComponent(withView)}`;
         
         if (fieldsToReturn.length > 0) {
             const fieldsParam = fieldsToReturn.map(f => `fields[]=${encodeURIComponent(f)}`).join('&');
@@ -97,7 +101,7 @@ async function fetchTerm(channelInfo, searchTerm) {
     
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
     const fields = ['UID', 'TERM', 'MASTER', 'CHANNEL NAME (Lookup)', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
-    const records = await fetchFromAirtable(TERM_TABLE_ID, formula, fields);
+    const records = await fetchFromAirtable(TERM_TABLE_ID, formula, fields, TERM_VIEW_ID);
     
     if (records.length > 0) {
         const firstRecord = records.find(r => r.fields.Definition) || records[0];
@@ -122,7 +126,7 @@ async function fetchTerm(channelInfo, searchTerm) {
 
 async function termsByChannel(channel) {
     const formula = `FIND("${channel.replace(/"/g, '\\"')}",ARRAYJOIN({CHANNEL},","))`;
-    const records = await fetchFromAirtable(TERM_TABLE_ID, formula, ['TERM']);
+    const records = await fetchFromAirtable(TERM_TABLE_ID, formula, ['TERM'], TERM_VIEW_ID);
     
     if (records.length > 0) {
         console.log(`Found ${records.length} records for channel ${channel}`);
