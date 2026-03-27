@@ -144,7 +144,7 @@ function escapeRegex(str) {
 
 function initializeCardFlip() {
     const cardTransitionTime = 500;
-    const cardContainer = document.querySelector('.tst-js-popup-card');
+    const cardContainer = document.querySelector('.tst-js-tst-popup-card');
     const flipTriggers = document.querySelectorAll('.tst-js-flip-trigger');
     let switching = false;
     let isFlipped = false; // track the current state
@@ -168,7 +168,7 @@ function initializeCardFlip() {
             isFlipped = !isFlipped;
             
             setTimeout(() => {
-                const cards = cardContainer.querySelectorAll('.popup-card');
+                const cards = cardContainer.querySelectorAll('.tst-popup-card');
                 cards.forEach(card => card.classList.toggle('tst-is-active'));
                 switching = false;
             }, cardTransitionTime / 2);

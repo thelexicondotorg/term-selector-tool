@@ -44,7 +44,7 @@
     pointer-events: none;
 }
 
-.popup-card-container {
+.tst-popup-card-container {
     perspective: 1000px;
     position: fixed;
     top: calc(50% + 40px);
@@ -56,16 +56,16 @@
     z-index: 100;
 }
 
-.popup-card-container a, .popup-card-container a:visited {
+.tst-popup-card-container a, .tst-popup-card-container a:visited {
     color: #717171;
 }
 
 
-.popup-card-container.tst-is-switching-to-back .popup-card-wrapper {
+.tst-popup-card-container.tst-is-switching-to-back .tst-popup-card-wrapper {
     animation: rotate 0.5s linear both;
 }
 
-.popup-card-container.tst-is-switching-to-front .popup-card-wrapper {
+.tst-popup-card-container.tst-is-switching-to-front .tst-popup-card-wrapper {
     animation: rotate-inverse 0.5s linear both;
 }
 
@@ -79,14 +79,14 @@
     z-index: 0;
 }
 
-.popup-card-wrapper {
+.tst-popup-card-wrapper {
     transform-style: preserve-3d;
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.popup-card {
+.tst-popup-card {
     width: 100%;
     height: auto;
     max-height: calc(100vh - 110px);
@@ -107,7 +107,7 @@
 }
 
 /* Gradient Fade Overlay */
-.popup-card::after {
+.tst-popup-card::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -133,17 +133,17 @@
     z-index: 15; 
 }
 
-.popup-card,
-.popup-card > * {
+.tst-popup-card,
+.tst-popup-card > * {
     backface-visibility: hidden;
     transform-style: preserve-3d;
 }
 
-.popup-card.tst-is-active {
+.tst-popup-card.tst-is-active {
     position: static;
 }
 
-.popup-card--back {
+.tst-popup-card--back {
     transform: rotateY(180deg);
 }
 
