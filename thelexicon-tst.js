@@ -147,7 +147,7 @@ function initializeCardFlip() {
     const cardContainer = document.querySelector('.tst-js-popup-card');
     const flipTriggers = document.querySelectorAll('.tst-js-flip-trigger');
     let switching = false;
-    let isFlipped = false; // traccia lo stato corrente
+    let isFlipped = false; // track the current state
 
     flipTriggers.forEach(trigger => {
         trigger.addEventListener('click', (e) => {
