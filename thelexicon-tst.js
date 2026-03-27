@@ -4,6 +4,8 @@ const CHANNEL_TABLE_ID = 'tblXxfNlMvFAVaupt';
 
 const PAT_TOKEN = 'path8VP4vIbdD1lCW.2d577815c2badbfc1e4cae7e5cd33048c90c6411fe0cf32b142835821442381c';
 
+const DEBUG = true;
+
 class Term {
     constructor(term, uid, finalSvg, channelInfo, otherChannels, definition, designer, designerNationality, relatedTerms) {
         this.term = term;
@@ -53,7 +55,8 @@ async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
             if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         
             const data = await response.json();
-            console.log(`Fetched ${data.records.length} records from AirTable`);
+            if(DEBUG) console.log("Got from AirTable: " + JSON.stringify(data));
+            // if(DEBUG) console.log(`Fetched ${data.records.length} records from AirTable`);
             
             allRecords = allRecords.concat(data.records);
             offset = data.offset; // undefined if there are no further pages
@@ -65,7 +68,7 @@ async function fetchFromAirtable(table, filterFormula, fieldsToReturn = []) {
         
     } while (offset);
     
-    console.log(`Total records fetched: ${allRecords.length}`);
+    // console.log(`Total records fetched: ${allRecords.length}`);
     return allRecords;
 }
 
@@ -82,7 +85,7 @@ async function fetchChannelInfo(channel) {
         let link =  firstRecord.fields['External Link'] ?? "https://lexiconoffood.com/lex-icons/library/";
         
         let o = new Channel(name, definition, link);
-        console.log(JSON.stringify(o, null, 2));
+        // if(DEBUG) console.log(JSON.stringify(o, null, 2));
         return o;
 
     }
@@ -90,13 +93,16 @@ async function fetchChannelInfo(channel) {
 }
 
 async function fetchTerm(channelInfo, searchTerm) {
-    console.log("Searching for: " + searchTerm);
+    if(DEBUG) console.log("Searching for: " + searchTerm);
+    
     const formula = `{TERM}="${searchTerm.replace(/"/g, '\\"')}"`;
     const fields = ['UID', 'TERM', 'MASTER', 'CHANNEL', 'Definition', 'DesignerLookup', 'Nationality', 'Related terms Lookup'];
     const records = await fetchFromAirtable(TERM_TABLE_ID, formula, fields);
     
     if (records.length > 0) {
-        const firstRecord = records[0];
+        const firstRecord = records.find(r => r.fields.Definition) || records[0];
+
+        if(DEBUG) console.log(firstRecord);
 
         let term = firstRecord.fields.TERM;
         let uid = firstRecord.fields.UID;
@@ -105,7 +111,7 @@ async function fetchTerm(channelInfo, searchTerm) {
         let definition = firstRecord.fields.Definition ?? "";
         let designer = firstRecord.fields.DesignerLookup ?? "Lex Icons™ Community";
         let designerNationality = firstRecord.fields.Nationality?.[0] ?? "USA";;
-        let relatedTerms = firstRecord.fields["Related terms Lookup"];
+        let relatedTerms = firstRecord.fields["Related terms Lookup"] ?? [];
 
         let o = new Term(term, uid, finalSvg, channelInfo, otherChannels, definition, designer, designerNationality, relatedTerms);
 
