@@ -181,6 +181,7 @@
     line-height: 1;
     text-align: right;
     max-width: fit-content;
+    text-transform: uppercase;
 }
 
 .popup-channel-badge a {
