@@ -69,6 +69,10 @@
     animation: rotate-inverse 0.5s linear both;
 }
 
+.thelexicon-tst-popup {
+    z-index: 101;
+}
+
 .thelexicon-tst-overlay {
     position: fixed;
     top: 0;
@@ -76,7 +80,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 0;
+    z-index: 100;
 }
 
 .tst-popup-card-wrapper {
