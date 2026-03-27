@@ -435,3 +435,12 @@
     right: 10px;
     cursor: pointer;   
 }
+
+.tst-bottomline {
+    font-size: 8px;
+}
+
+.tst-bottomline a {
+    text-decoration: none;
+    font-weight: 600;
+}
