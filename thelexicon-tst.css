@@ -446,3 +446,10 @@
     text-decoration: none;
     font-weight: 600;
 }
+.tst-foodicons-link a {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
+    color: #6B6B6B;
+    text-decoration: none;
+    font-weight: 600;
+}
