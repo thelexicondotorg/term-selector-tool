@@ -19,13 +19,21 @@
         
         <p class="popup-definition">{{definition}}</p>
       </div>
-      
-      <div class="popup-dot-navigator">
-        <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/dot-navigator-front.png">
-      </div>
-      
-      <div class="popup-flip popup-flip-front tst-js-flip-trigger">
-        <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/flip-front.png" alt="Flip to learn more">
+
+      <div class="tst-footer">
+
+        <div class="popup-id">
+&nbsp;
+        </div>
+
+        
+        <div class="popup-dot-navigator">
+          <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/dot-navigator-front.png">
+        </div>
+        
+        <div class="tst-popup-flip tst-popup-flip-front tst-js-flip-trigger">
+          <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/flip-front.png" alt="Flip to learn more">
+        </div>
       </div>
     </div>
     
@@ -51,20 +59,20 @@
       
       <div class="popup-body-back">
 
-      <div class="popup-section">
-        <div class="popup-title">This term appears in the {{channel}} Lexicon</div>
+        <div class="popup-section">
+          <div class="popup-title">This term appears in the {{channel}} Lexicon</div>
     
-        <p class="popup-channel-description">
-          {{channel.definition}}
-        </p>
-      </div>
+          <p class="popup-channel-description">
+            {{channel.definition}}
+          </p>
+        </div>
 
         {{relatedTermsSection}}
 
 
         {{otherChannelsSection}}
       
-<br>
+        <br>
         <div class="popup-section">
           <h3 class="popup-title">About foodicons</h3>
           <div>
@@ -79,31 +87,28 @@
         
       </div>
 
-      <div class="tst-footer">
-   
-        <div class="popup-flip popup-flip-back tst-js-flip-trigger">
-          <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/flip-back.png" alt="Flip to front">
-        </div>
- 
-       
-        <div class="popup-dot-navigator">
-          <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/dot-navigator-back.png">
-        </div>
-         
 
-        <div class="popup-id">
-          [{{uid}}]
+      
+      <div class="tst-footer">
+  
+        <div class="tst-popup-flip tst-popup-flip-back tst-js-flip-trigger">
+          <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/flip-back.png" alt="Flip to front">
         </div>
 
       
         <div class="popup-dot-navigator">
           <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/dot-navigator-back.png">
         </div>
-  
-        <div class="popup-flip popup-flip-back js-flip-trigger">
-          <img src="https://thelexicon.org/TERM-SELECTOR-TOOL/img/flip-back.png" alt="Flip to front">
+        
+
+        <div class="popup-id">
+          [{{uid}}]
         </div>
+      
       </div>
+
+
+    </div>
     
+    </div>
   </div>
-</div>

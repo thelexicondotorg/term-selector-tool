@@ -184,6 +184,7 @@ async function loadPopupTemplate() {
         let prefix = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
             ? ""
             : "https://thelexicondotorg.github.io/term-selector-tool/";
+
         const response = await fetch(prefix + 'popup.html');
         popupTemplate = await response.text();
     }
