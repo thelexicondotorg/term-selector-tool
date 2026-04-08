@@ -93,7 +93,7 @@
     height: auto;
     max-height: calc(100vh - 110px);
     background-color: #EBEAEA;
-    background-image: url("https://thelexicon.org/TERM-SELECTOR-TOOL/img/background.png");
+    background-image: url("https://thelexicondotorg.github.io/term-selector-tool/img/background.png");
     background-size: cover;
     border-radius: 20px;
     display: flex;
@@ -239,7 +239,7 @@
     left: 0;
     width: 80px;
     height: 80px;
-    background-image: url('https://thelexicon.org/TERM-SELECTOR-TOOL/img/quote.png');
+    background-image: url('https://thelexicondotorg.github.io/term-selector-tool/img/quote.png');
     background-repeat: no-repeat;
     background-size: contain;
     opacity: 0.4;
@@ -252,7 +252,7 @@
     right: 0;
     width: 80px;
     height: 80px;
-    background-image: url('https://thelexicon.org/TERM-SELECTOR-TOOL/img/quote.png');
+    background-image: url('https://thelexicondotorg.github.io/term-selector-tool/img/quote.png');
     background-repeat: no-repeat;
     background-size: contain;
     opacity: 0.4;
