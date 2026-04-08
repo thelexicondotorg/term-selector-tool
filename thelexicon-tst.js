@@ -370,7 +370,8 @@ async function getTermsToHighlight() {
     const channel = getChannel();
     const searchTerms = await termsByChannel(channel);
     const excludedTerms = getExcludedTerms();
-    return searchTerms.filter(term => !excludedTerms.includes(term.toLowerCase()));
+    const terms = searchTerms.filter(term => !excludedTerms.includes(term.toLowerCase()));
+    return new Set(terms);
 }
 
 async function foundTerms() {
