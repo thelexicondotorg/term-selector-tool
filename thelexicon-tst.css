@@ -6,6 +6,7 @@
 .highlight {
     text-transform: lowercase;
     font-family: 'Trade Gothic';
+    font-style: normal;
     background-color: #97c21c;
     border-radius: 5px;
     color: white !important;
